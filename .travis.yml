@@ -1,0 +1,30 @@
+language:
+    - java
+
+services:
+    - mysql
+
+jdk:
+    - oraclejdk7
+
+before_install:
+    - mysql -u root < init.sql
+
+script:
+    - cd Item\ 3/Acme-Chorbies/
+    - mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+    - mvn clean test -B
+    - ls -lah
+
+cache:
+    directories:
+        - $HOME/.m2   # Cache para las dependencias de maven
+
+dist:
+    - trusty
+
+sudo:
+    - false
+
+notifications:
+- email: false
