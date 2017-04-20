@@ -150,6 +150,66 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountM1" class="security.UserAccount">
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountM2" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountM3" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountM4" class="security.UserAccount">
+		<property name="username" value="manager4" />
+		<property name="password" value="e1ec6fc941af3ba79a4ac5242dd39735" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountM5" class="security.UserAccount">
+		<property name="username" value="manager5" />
+		<property name="password" value="029cb1d27c0b9c551703ccba2591c334" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->
 
 	<!-- ADMIN -->
@@ -177,6 +237,12 @@
 		<property name="relationship" value="LOVE" />
 		<property name="userAccount" ref="userAccountC1" />
 		<property name="searchTemplate" ref="searchTemplate1" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+            	<ref bean="event2" />
+			</list>
+        </property>
 	</bean>
 	
 	<bean id="chorbi2" class="domain.Chorbi">
@@ -192,6 +258,11 @@
 		<property name="relationship" value="LOVE" />
 		<property name="userAccount" ref="userAccountC2" />
 		<property name="searchTemplate" ref="searchTemplate2" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+			</list>
+        </property>
 	</bean>
 	
 	<bean id="chorbi3" class="domain.Chorbi">
@@ -208,6 +279,11 @@
 		<property name="userAccount" ref="userAccountC3" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="searchTemplate" ref="searchTemplate3" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+			</list>
+        </property>
 	</bean>
 	
 	<bean id="chorbi4" class="domain.Chorbi">
@@ -224,6 +300,11 @@
 		<property name="userAccount" ref="userAccountC4" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="searchTemplate" ref="searchTemplate4" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+			</list>
+        </property>	
 	</bean>
 	
 	<bean id="chorbi5" class="domain.Chorbi">
@@ -240,6 +321,11 @@
 		<property name="userAccount" ref="userAccountC5" />
 		<property name="creditCard" ref="creditCard3" />
 		<property name="searchTemplate" ref="searchTemplate5" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+			</list>
+        </property>	
 	</bean>
 	
 	<bean id="chorbi6" class="domain.Chorbi">
@@ -256,6 +342,11 @@
 		<property name="userAccount" ref="userAccountC6" />
 		<property name="creditCard" ref="creditCard4" />
 		<property name="searchTemplate" ref="searchTemplate6" />
+		<property name="events">
+        	<list>
+            	<ref bean="event1" />
+			</list>
+        </property>	
 	</bean>
 	
 	<bean id="chorbi7" class="domain.Chorbi">
@@ -317,6 +408,59 @@
 		<property name="relationship" value="FRIENDSHIP" />
 		<property name="userAccount" ref="userAccountC10" />
 		<property name="searchTemplate" ref="searchTemplate10" />
+	</bean>
+	
+		<!-- MANAGER -->
+	
+	<bean id="manager1" class="domain.Manager">
+		<property name="name" value="managerName1" />
+		<property name="surname" value="managerSurname1" />
+		<property name="email" value="manager1@email.com" />
+		<property name="phone" value="+656 3752751" />
+		<property name="company" value="company1" />
+		<property name="vat" value="ATU99999499" />
+		<property name="userAccount" ref="userAccountM1" />
+	</bean>
+	
+	<bean id="manager2" class="domain.Manager">
+		<property name="name" value="managerName2" />
+		<property name="surname" value="managerSurname2" />
+		<property name="email" value="manager2@email.com" />
+		<property name="phone" value="+656 3452751" />
+		<property name="company" value="company2" />
+		<property name="vat" value="ATU99999999" />
+		<property name="userAccount" ref="userAccountM2" />
+	</bean>
+	
+	<bean id="manager3" class="domain.Manager">
+		<property name="name" value="managerName3" />
+		<property name="surname" value="managerSurname3" />
+		<property name="email" value="manager3@email.com" />
+		<property name="phone" value="+656 3457751" />
+		<property name="company" value="company3" />
+		<property name="vat" value="ATU92999999" />
+		<property name="userAccount" ref="userAccountM3" />
+	</bean>
+	
+	<bean id="manager4" class="domain.Manager">
+		<property name="name" value="managerName4" />
+		<property name="surname" value="managerSurname4" />
+		<property name="email" value="manager4@email.com" />
+		<property name="phone" value="+656 3457151" />
+		<property name="company" value="company4" />
+		<property name="vat" value="ATU92999949" />
+		<property name="userAccount" ref="userAccountM4" />
+	</bean>
+	
+	<bean id="manager5" class="domain.Manager">
+		<property name="name" value="managerName5" />
+		<property name="surname" value="managerSurname5" />
+		<property name="email" value="manager5@email.com" />
+		<property name="phone" value="+656 32374151" />
+		<property name="company" value="company5" />
+		<property name="vat" value="ATU92949949" />
+		<property name="userAccount" ref="userAccountM5" />
+		<property name="creditCard" ref="creditCard6" />
 	</bean>
 	
 	<!-- COORDINATES -->
@@ -457,6 +601,15 @@
 		<property name="year" value="2011" />
 		<property name="month" value="05" />
 		<property name="cvv" value="890" />
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holder" value="holderName6"/>
+		<property name="brand" value="HELLO" />
+		<property name="number" value="367942049348152" />
+		<property name="year" value="2030" />
+		<property name="month" value="05" />
+		<property name="cvv" value="894" />
 	</bean>
 	
 	<!-- CHORBI LIKES -->
@@ -755,4 +908,125 @@
 		<property name="path" value="http://www.km77.com/marcas/ford/fiesta_05/tdci90/med/04.jpg" />
 	</bean>
 	
+	<!-- EVENT -->
+	
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Event1" />
+		<property name="moment" value="07/11/2020 17:33" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="20" />
+		<property name="availableSeats" value="14" />
+		<property name="manager" ref="manager1" />
+	</bean>
+
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Event2" />
+		<property name="moment" value="07/11/2021 17:20" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="30" />
+		<property name="availableSeats" value="29" />
+		<property name="manager" ref="manager1" />
+	</bean>
+	
+	<bean id="event3" class="domain.Event">
+		<property name="title" value="Event3" />
+		<property name="moment" value="07/11/2020 19:33" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="40" />
+		<property name="availableSeats" value="40" />
+		<property name="manager" ref="manager1" />
+	</bean>
+	
+	<bean id="event4" class="domain.Event">
+		<property name="title" value="Event4" />
+		<property name="moment" value="07/11/2020 14:33" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="20" />
+		<property name="availableSeats" value="20" />
+		<property name="manager" ref="manager1" />
+	</bean>
+	
+	<bean id="event5" class="domain.Event">
+		<property name="title" value="Event5" />
+		<property name="moment" value="07/11/2025 17:33" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="10" />
+		<property name="availableSeats" value="10" />
+		<property name="manager" ref="manager1" />
+	</bean>
+	
+	<bean id="event6" class="domain.Event">
+		<property name="title" value="Event6" />
+		<property name="moment" value="07/11/2022 12:00" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="50" />
+		<property name="availableSeats" value="50" />
+		<property name="manager" ref="manager1" />
+	</bean>
+
+	<bean id="event7" class="domain.Event">
+		<property name="title" value="Event7" />
+		<property name="moment" value="07/11/2015 12:00" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="50" />
+		<property name="availableSeats" value="50" />
+		<property name="manager" ref="manager2" />
+	</bean>
+		
+	<!-- FEE -->
+	
+	<bean id="fee1" class="domain.Fee">
+		<property name="feeType" value="0" />
+		<property name="value" value="1" />
+	</bean>
+	
+	<bean id="fee2" class="domain.Fee">
+		<property name="feeType" value="1" />
+		<property name="value" value="1" />
+	</bean>
+
+	<!-- CHARGE -->
+	
+	<bean id="charge1" class="domain.Charge">
+		<property name="ammount" value="20" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+	
+	<bean id="charge2" class="domain.Charge">
+		<property name="ammount" value="10" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+	
+	<bean id="charge3" class="domain.Charge">
+		<property name="ammount" value="20" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+
+	<bean id="charge4" class="domain.Charge">
+		<property name="ammount" value="20" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+	
+	<bean id="charge5" class="domain.Charge">
+		<property name="ammount" value="20" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+	
+	<bean id="charge6" class="domain.Charge">
+		<property name="ammount" value="20" />
+		<property name="chorbi" value="chorbi1" />
+	</bean>
+	
+	<bean id="charge7" class="domain.Charge">
+		<property name="ammount" value="7" />
+		<property name="chorbi" value="chorbi2" />
+	</bean>
+
 </beans>
