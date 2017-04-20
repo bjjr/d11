@@ -31,7 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 		"description", "gender", "city", "country", "province", "state"
 	})
 })
-public class Chorbi extends Actor implements Serializable {
+public class Chorbi extends User implements Serializable {
 
 	//Attributes
 

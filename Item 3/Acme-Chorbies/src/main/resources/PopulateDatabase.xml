@@ -606,7 +606,7 @@
 	<bean id="creditCard6" class="domain.CreditCard">
 		<property name="holder" value="holderName6"/>
 		<property name="brand" value="HELLO" />
-		<property name="number" value="367942049348152" />
+		<property name="number" value="342706286514582" />
 		<property name="year" value="2030" />
 		<property name="month" value="05" />
 		<property name="cvv" value="894" />
@@ -996,37 +996,37 @@
 	
 	<bean id="charge1" class="domain.Charge">
 		<property name="ammount" value="20" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge2" class="domain.Charge">
 		<property name="ammount" value="10" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge3" class="domain.Charge">
 		<property name="ammount" value="20" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 
 	<bean id="charge4" class="domain.Charge">
 		<property name="ammount" value="20" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge5" class="domain.Charge">
 		<property name="ammount" value="20" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge6" class="domain.Charge">
 		<property name="ammount" value="20" />
-		<property name="chorbi" value="chorbi1" />
+		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge7" class="domain.Charge">
 		<property name="ammount" value="7" />
-		<property name="chorbi" value="chorbi2" />
+		<property name="chorbi" ref="chorbi2" />
 	</bean>
 
 </beans>
