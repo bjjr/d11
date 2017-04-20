@@ -1,0 +1,5 @@
+- Add credit card to a Chorbi
+	Users = 50
+	Loop count = 100
+	Tiempo 90% Line = 1358 ns = 1,5 seg (apróx.)
+	Cuello de botella = Procesador

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccountA" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+
+	<!-- ADMIN -->
+	
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="adminName" />
+		<property name="surname" value="adminSurname" />
+		<property name="email" value="admin@email.com" />
+		<property name="phone" value="+666 335566" />
+		<property name="userAccount" ref="userAccountA" />
+	</bean>
+	
+	<!-- BANNERS -->
+	
+	<bean id="banner1" class="domain.Banner">
+		<property name="service" value="Acme-Pad-Thai" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d07/master/Acme-Pad-Thai/src/main/webapp/images/acmepadthai.png" />
+	</bean>
+	
+	<bean id="banner2" class="domain.Banner">
+		<property name="service" value="Acme BnB" />
+		<property name="path" value="https://github.com/bjjr/d08/raw/deploy/Item%204/AcmeBnB/src/main/webapp/images/logo.png" />
+	</bean>
+	
+	<bean id="banner3" class="domain.Banner">
+		<property name="service" value="Acme CnG" />
+		<property name="path" value="https://github.com/bjjr/d09/raw/master/Item%203/Acme-CnG/src/main/webapp/images/logo.png" />
+	</bean>
+	
+</beans>
