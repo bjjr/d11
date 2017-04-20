@@ -2,11 +2,13 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,6 +42,7 @@ public class Chorbi extends Actor implements Serializable {
 	private String				gender;
 	private Coordinates			coordinates;
 	private String				relationship;
+	private Date				lastPaymentDate;
 
 
 	@NotBlank
@@ -107,22 +110,22 @@ public class Chorbi extends Actor implements Serializable {
 		this.relationship = relationship;
 	}
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getLastPaymentDate() {
+		return this.lastPaymentDate;
+	}
+
+	public void setLastPaymentDate(final Date lastPaymentDate) {
+		this.lastPaymentDate = lastPaymentDate;
+	}
+
 
 	// Relationships
 
-	private CreditCard		creditCard;
-	private SearchTemplate	searchTemplate;
+	private SearchTemplate		searchTemplate;
+	private Collection<Event>	events;
 
-
-	@Valid
-	@OneToOne(optional = true)
-	public CreditCard getCreditCard() {
-		return this.creditCard;
-	}
-
-	public void setCreditCard(final CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
 
 	@NotNull
 	@Valid
@@ -133,6 +136,15 @@ public class Chorbi extends Actor implements Serializable {
 
 	public void setSearchTemplate(final SearchTemplate searchTemplate) {
 		this.searchTemplate = searchTemplate;
+	}
+
+	@ManyToMany
+	public Collection<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(final Collection<Event> events) {
+		this.events = events;
 	}
 
 }
