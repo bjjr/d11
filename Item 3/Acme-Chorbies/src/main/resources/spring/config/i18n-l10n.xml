@@ -26,14 +26,19 @@
 		<value>/views/actor/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/banner/messages</value>
-		<value>/views/coordinates/messages</value>
+		<value>/views/cache/messages</value>
+		<value>/views/charge/messages</value>
 		<value>/views/chirp/messages</value>
 		<value>/views/chorbi/messages</value>
-		<value>/views/legal/messages</value>
-		<value>/views/searchTemplate/messages</value>
 		<value>/views/chorbiLike/messages</value>
+		<value>/views/coordinates/messages</value>
 		<value>/views/creditCard/messages</value>
-		<value>/views/cache/messages</value>
+		<value>/views/event/messages</value>
+		<value>/views/fee/messages</value>
+		<value>/views/legal/messages</value>
+		<value>/views/manager/messages</value>
+		<value>/views/searchTemplate/messages</value>
+		
 	</util:list>
 
 </beans>
