@@ -32,6 +32,9 @@
 		<bean class="converters.BannerToStringConverter" />
 		<bean class="converters.StringToBannerConverter" />
 		
+		<bean class="converters.ChargeToStringConverter" />
+		<bean class="converters.StringToChargeConverter" />
+		
 		<bean class="converters.ChirpToStringConverter" />
 		<bean class="converters.StringToChirpConverter" />
 		
@@ -44,8 +47,20 @@
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
 		
+		<bean class="converters.EventToStringConverter" />
+		<bean class="converters.StringToEventConverter" />
+		
+		<bean class="converters.FeeToStringConverter" />
+		<bean class="converters.StringToFeeConverter" />
+		
+		<bean class="converters.ManagerToStringConverter" />
+		<bean class="converters.StringToManagerConverter" />
+		
 		<bean class="converters.SearchTemplateToStringConverter" />
 		<bean class="converters.StringToSearchTemplateConverter" />
+		
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
 		
 		<bean class="converters.UserAccountToStringConverter" />
 		<bean class="converters.StringToUserAccountConverter" />
