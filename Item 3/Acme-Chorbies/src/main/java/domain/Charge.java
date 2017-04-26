@@ -15,16 +15,25 @@ public class Charge extends DomainEntity {
 
 	// Attributes -----------------------------------
 
-	private double	ammount;
+	private double	amount;
+	private boolean	paid;
 
 
 	@Min(value = 0)
-	public double getAmmount() {
-		return this.ammount;
+	public double getAmount() {
+		return this.amount;
 	}
 
-	public void setAmmount(final double ammount) {
-		this.ammount = ammount;
+	public void setAmount(final double amount) {
+		this.amount = amount;
+	}
+
+	public boolean isPaid() {
+		return this.paid;
+	}
+
+	public void setPaid(final boolean paid) {
+		this.paid = paid;
 	}
 
 
