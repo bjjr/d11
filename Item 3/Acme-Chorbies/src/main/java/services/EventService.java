@@ -91,6 +91,29 @@ public class EventService {
 		chirp = this.getDeletionChirp(event);
 		this.sendNotificationChirp(chirp, event);
 	}
+	
+	public Collection<Event> findAll() {
+		Assert.isTrue((this.actorService.checkAuthority("MANAGER"))
+			|| (!(this.actorService.checkAuthority("MANAGER") && this.actorService.checkAuthority("CHORBI") && this.actorService.checkAuthority("ADMIN") && this.actorService.checkAuthority("BANNED"))));
+		Collection<Event> res;
+
+		res = this.eventRepository.findAll();
+		Assert.notNull(res);
+
+		return res;
+	}
+
+	public Event findOne(final int eventId) {
+		Assert.isTrue(eventId != 0);
+
+		Event res;
+
+		res = this.eventRepository.findOne(eventId);
+		Assert.notNull(res);
+
+		return res;
+
+	}
 
 	// Other business methods -----------------------
 
@@ -201,6 +224,15 @@ public class EventService {
 		Collection<Chorbi> res;
 
 		res = this.eventRepository.findChorbiesByEvent(eventId);
+
+		return res;
+	}
+	
+	public Collection<Event> findEventsLessOneMonthSeatsAvailables() {
+		Collection<Event> res;
+
+		res = this.eventRepository.findEventsLessOneMonthSeatsAvailables();
+		Assert.notNull(res);
 
 		return res;
 	}

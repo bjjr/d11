@@ -983,12 +983,12 @@
 	<!-- FEE -->
 	
 	<bean id="fee1" class="domain.Fee">
-		<property name="feeType" value="0" />
+		<property name="feeType" value="1" />
 		<property name="value" value="1" />
 	</bean>
 	
 	<bean id="fee2" class="domain.Fee">
-		<property name="feeType" value="1" />
+		<property name="feeType" value="2" />
 		<property name="value" value="1" />
 	</bean>
 
@@ -996,36 +996,43 @@
 	
 	<bean id="charge1" class="domain.Charge">
 		<property name="ammount" value="20" />
+		<property name="paid" value="false" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge2" class="domain.Charge">
 		<property name="ammount" value="10" />
+		<property name="paid" value="false" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge3" class="domain.Charge">
 		<property name="ammount" value="20" />
+		<property name="paid" value="false" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 
 	<bean id="charge4" class="domain.Charge">
 		<property name="ammount" value="20" />
+		<property name="paid" value="true" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge5" class="domain.Charge">
 		<property name="ammount" value="20" />
+		<property name="paid" value="true" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge6" class="domain.Charge">
 		<property name="ammount" value="20" />
+		<property name="paid" value="true" />
 		<property name="chorbi" ref="chorbi1" />
 	</bean>
 	
 	<bean id="charge7" class="domain.Charge">
 		<property name="ammount" value="7" />
+		<property name="paid" value="true" />
 		<property name="chorbi" ref="chorbi2" />
 	</bean>
 
