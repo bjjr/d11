@@ -89,6 +89,15 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.minStarsPerChorbi" /></h2>
 <jstl:out value="${minStarsPerChorbi}"></jstl:out>
 
+<h2><spring:message code="administrator.chorbiesOrderByStars" /></h2>
+<display:table pagesize="5" class="displaytag" name="chorbiesOrderByStars"
+requestURI="administrator/dashboard.do" id="row">
+
+	<acme:column code="actor.name" property="${row.name}"/>
+	<acme:column code="actor.surname" property="${row.surname}"/>
+
+</display:table>
+
 <h2><spring:message code="administrator.chorbiesMCR" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesMCR"

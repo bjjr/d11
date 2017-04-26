@@ -58,4 +58,8 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select c.id from Chorbi c")
 	List<Integer> findAllId();
+
+	@Query("select cl.liked from ChorbiLike cl group by cl.liked order by avg(cl.stars) desc")
+	Collection<Chorbi> findChorbiesSortNumStars();
+
 }

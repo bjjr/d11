@@ -69,6 +69,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Integer maxStarsPerChorbi;
 		final Integer minStarsPerChorbi;
 		final Double avgStarsPerChorbi;
+		final Collection<Chorbi> chorbiesOrderByStars;
 
 		numberOfChorbiesPerCountry = this.chorbiService.findNumberOfChorbiesPerCountry();
 		numberOfChorbiesPerCity = this.chorbiService.findNumberOfChorbiesPerCity();
@@ -94,6 +95,7 @@ public class DashboardAdministratorController extends AbstractController {
 		minStarsPerChorbi = this.chorbiLikeService.findMinStarsPerChorbi();
 		maxStarsPerChorbi = this.chorbiLikeService.findMaxStarsPerChorbi();
 		avgStarsPerChorbi = this.chorbiLikeService.findAvgStarsPerChorbi();
+		chorbiesOrderByStars = this.chorbiService.findChorbiesSortNumStars();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
@@ -121,6 +123,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("avgStarsPerChorbi", avgStarsPerChorbi);
 		result.addObject("maxStarsPerChorbi", maxStarsPerChorbi);
 		result.addObject("minStarsPerChorbi", minStarsPerChorbi);
+		result.addObject("chorbiesOrderByStars", chorbiesOrderByStars);
 
 		return result;
 
