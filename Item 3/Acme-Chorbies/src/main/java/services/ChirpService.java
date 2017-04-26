@@ -55,8 +55,27 @@ public class ChirpService {
 
 	// Simple CRUD methods ----------------------------------
 
+	public Chirp create() {
+		Assert.isTrue(this.actorService.checkAuthority("CHORBI") || this.actorService.checkAuthority("MANAGER"));
+
+		Chirp result;
+		Date moment;
+		Collection<String> attachments;
+
+		attachments = new ArrayList<>();
+		moment = new Date(System.currentTimeMillis() - 1000);
+
+		result = new Chirp();
+
+		result.setAttachments(attachments);
+		result.setMoment(moment);
+		result.setCopy(false);
+
+		return result;
+	}
+
 	public Chirp create(final int recipientId) {
-		Assert.isTrue(this.actorService.checkAuthority("CHORBI"));
+		Assert.isTrue(this.actorService.checkAuthority("CHORBI") || this.actorService.checkAuthority("MANAGER"));
 
 		Chirp result;
 		final Date moment;
@@ -238,11 +257,6 @@ public class ChirpService {
 
 		return result;
 	}
-
-
-
-
-
 
 	public String getNameRecipient(final Chorbi recipient) {
 		String result;
