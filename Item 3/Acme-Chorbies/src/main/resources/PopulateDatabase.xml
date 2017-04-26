@@ -616,12 +616,14 @@
 	
 	<bean id="chorbiLike1" class="domain.ChorbiLike">
 		<property name="moment" value="05/05/2016 17:45" />
+		<property name="stars" value="2" />
 		<property name="liker" ref="chorbi2" />
 		<property name="liked" ref="chorbi4" />
 	</bean>
 	
 	<bean id="chorbiLike2" class="domain.ChorbiLike">
 		<property name="moment" value="05/06/2016 17:49" />
+		<property name="stars" value="1" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi2" />
 	</bean>
@@ -629,60 +631,70 @@
 	<bean id="chorbiLike3" class="domain.ChorbiLike">
 		<property name="moment" value="03/05/2016 12:45" />
 		<property name="comment" value="A nice comment" />
+		<property name="stars" value="3" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi4" />
 	</bean>
 	
 	<bean id="chorbiLike4" class="domain.ChorbiLike">
 		<property name="moment" value="04/12/2016 18:03" />
+		<property name="stars" value="1" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi5" />
 	</bean>
 	
 	<bean id="chorbiLike5" class="domain.ChorbiLike">
 		<property name="moment" value="05/05/2016 14:15" />
+		<property name="stars" value="0" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi6" />
 	</bean>
 	
 	<bean id="chorbiLike6" class="domain.ChorbiLike">
 		<property name="moment" value="06/05/2016 17:45" />
+		<property name="stars" value="2" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi7" />
 	</bean>
 	
 	<bean id="chorbiLike7" class="domain.ChorbiLike">
 		<property name="moment" value="08/25/2016 23:51" />
+		<property name="stars" value="2" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi8" />
 	</bean>
 	
 	<bean id="chorbiLike8" class="domain.ChorbiLike">
 		<property name="moment" value="11/11/2016 22:37" />
+		<property name="stars" value="2" />
 		<property name="liker" ref="chorbi3" />
 		<property name="liked" ref="chorbi9" />
 	</bean>
 	
 	<bean id="chorbiLike9" class="domain.ChorbiLike">
 		<property name="moment" value="11/10/2016 23:37" />
+		<property name="stars" value="1" />
 		<property name="liker" ref="chorbi5" />
 		<property name="liked" ref="chorbi4" />
 	</bean>
 	
 	<bean id="chorbiLike10" class="domain.ChorbiLike">
 		<property name="moment" value="11/27/2016 19:37" />
+		<property name="stars" value="3" />
 		<property name="liker" ref="chorbi6" />
 		<property name="liked" ref="chorbi4" />
 	</bean>
 	
 	<bean id="chorbiLike11" class="domain.ChorbiLike">
 		<property name="moment" value="11/30/2016 18:37" />
+		<property name="stars" value="3" />
 		<property name="liker" ref="chorbi7" />
 		<property name="liked" ref="chorbi4" />
 	</bean>
 	
 	<bean id="chorbiLike12" class="domain.ChorbiLike">
 		<property name="moment" value="11/01/2016 15:37" />
+		<property name="stars" value="2" />
 		<property name="liker" ref="chorbi8" />
 		<property name="liked" ref="chorbi4" />
 	</bean>

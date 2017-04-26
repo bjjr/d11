@@ -33,4 +33,13 @@ public interface ChorbiLikeRepository extends JpaRepository<ChorbiLike, Integer>
 
 	@Query("select l from ChorbiLike l where l.liker.id = ?1 and l.liked.id = ?2")
 	ChorbiLike findLike(int likerId, int likedId);
+
+	@Query("select max(cl.stars) from ChorbiLike cl")
+	Integer findMaxStarsPerChorbi();
+
+	@Query("select min(cl.stars) from ChorbiLike cl")
+	Integer findMinStarsPerChorbi();
+
+	@Query("select avg(cl.stars) from ChorbiLike cl")
+	Double findAvgStarsPerChorbi();
 }

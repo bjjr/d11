@@ -205,4 +205,16 @@ public class ChorbiLikeService {
 		return result;
 	}
 
+	public Double findAvgStarsPerChorbi() {
+		return this.chorbiLikeRepository.findAvgStarsPerChorbi();
+	}
+
+	public Integer findMaxStarsPerChorbi() {
+		return this.chorbiLikeRepository.findMaxStarsPerChorbi();
+	}
+
+	public Integer findMinStarsPerChorbi() {
+		return this.chorbiLikeRepository.findMinStarsPerChorbi();
+	}
+
 }
