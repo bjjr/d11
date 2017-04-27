@@ -17,6 +17,9 @@
 	<acme:textarea code="chorbiLike.comment" path="comment" />
 	<br />
 	
+	<acme:textbox code="chorbiLike.stars" path="stars" size="1"/>
+	<br />
+	
 	<acme:textbox code="chorbiLike.moment" path="moment" readonly="true"/>
 	<br />
 		
