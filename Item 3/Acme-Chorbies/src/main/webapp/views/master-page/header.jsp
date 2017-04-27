@@ -29,6 +29,8 @@
 					<li><acme:link href="dashboard/administrator/dashboard.do" code="master.page.dashboard"/></li>
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
+					<li><acme:link href="fee/administrator/list.do" code="master.page.fee.list"/></li>
+					<li><acme:link href="charge/administrator/economicStatistics.do" code="master.page.charge.economicStatistics"/></li>
 				</ul>
 			</li>
 		</security:authorize>
