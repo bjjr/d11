@@ -39,18 +39,18 @@ public class Charge extends DomainEntity {
 
 	// Relationships --------------------------------
 
-	private Chorbi	chorbi;
+	private User	user;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Chorbi getChorbi() {
-		return this.chorbi;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setChorbi(final Chorbi chorbi) {
-		this.chorbi = chorbi;
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 }
