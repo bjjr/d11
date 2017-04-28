@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,11 +50,14 @@ public class EventController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 		Collection<Event> events;
+		Date current;
 
 		events = this.eventService.findAll();
+		current = new Date(System.currentTimeMillis());
 
 		res = new ModelAndView("event/list");
 		res.addObject("events", events);
+		res.addObject("current", current);
 		res.addObject("requestURI", "event/list.do");
 
 		return res;
