@@ -164,6 +164,10 @@ public class ChorbiLikeService {
 
 	}
 
+	public Collection<Chorbi> findChorbisByLiked(final int chorbiId) {
+		return this.chorbiLikeRepository.findChorbisByLiked(chorbiId);
+	}
+
 	public Double findAvgLikesPerChorbi() {
 		Double result;
 

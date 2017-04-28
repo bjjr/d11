@@ -48,6 +48,7 @@
 					<li><acme:link href="chirp/chorbi/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="chorbi/listChorbiesLikedMe.do"><spring:message code="master.page.chorbi.list.likers" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BANNED')">
