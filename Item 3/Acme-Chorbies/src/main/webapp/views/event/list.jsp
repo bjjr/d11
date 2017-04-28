@@ -30,8 +30,10 @@
 	<acme:column code="actor.name" property="${row.manager.name}" />
 
 	<security:authorize access="isAnonymous()">
+	<jstl:if test="${all}">
 	<jstl:if test="${row.moment < (current)}">
 		
+	</jstl:if>
 	</jstl:if>
 	</security:authorize>
 
