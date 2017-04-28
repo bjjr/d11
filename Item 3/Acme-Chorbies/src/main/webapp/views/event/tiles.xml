@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles.xml
+ * tiles_es.xml
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -13,7 +13,7 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+      
 <tiles-definitions>
 
 	<definition name="event/list" extends="master.page">	
@@ -21,4 +21,9 @@
 		<put-attribute name="body" value="/views/event/list.jsp" />
 	</definition>
 
+	<definition name="event/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit event" />
+		<put-attribute name="body" value="/views/event/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>

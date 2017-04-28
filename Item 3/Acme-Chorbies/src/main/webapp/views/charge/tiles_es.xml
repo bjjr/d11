@@ -16,14 +16,14 @@
       
 <tiles-definitions>
 
-<definition name="event/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de eventos" />
-		<put-attribute name="body" value="/views/event/list.jsp" />
+	<definition name="charge/list" extends="master.page">	
+		<put-attribute name="title" value="Facturas" />
+		<put-attribute name="body" value="/views/charge/list.jsp" />
 	</definition>
-
-	<definition name="event/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar evento" />
-		<put-attribute name="body" value="/views/event/edit.jsp" />
+	
+	<definition name="charge/economicStatistics" extends="master.page">	
+		<put-attribute name="title" value="Estadísticas económicas" />
+		<put-attribute name="body" value="/views/charge/economicStatistics.jsp" />
 	</definition>
 	
 </tiles-definitions>

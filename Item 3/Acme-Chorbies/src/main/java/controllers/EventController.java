@@ -29,7 +29,7 @@ public class EventController extends AbstractController {
 		super();
 	}
 
-	// Listing -----------------------------------------
+	// Listing --------------------------------------
 
 	@RequestMapping(value = "/listAvSts", method = RequestMethod.GET)
 	public ModelAndView listAvSts() {
@@ -67,7 +67,6 @@ public class EventController extends AbstractController {
 		res.addObject("requestURI", "event/list.do");
 
 		return res;
-
 	}
 
 }

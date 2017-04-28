@@ -29,6 +29,8 @@
 					<li><acme:link href="dashboard/administrator/dashboard.do" code="master.page.dashboard"/></li>
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
+					<li><acme:link href="fee/administrator/list.do" code="master.page.fee.list"/></li>
+					<li><acme:link href="charge/administrator/economicStatistics.do" code="master.page.charge.economicStatistics"/></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -54,6 +56,16 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><acme:link href="j_spring_security_logout" code="master.page.logout" /></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><acme:link href="event/manager/list.do" code="master.page.manager.event.list"/></li>
+					<li><acme:link href="event/manager/create.do" code="master.page.manager.event.create"/></li>
 				</ul>
 			</li>
 		</security:authorize>
