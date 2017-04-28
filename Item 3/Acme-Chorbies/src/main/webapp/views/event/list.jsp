@@ -32,6 +32,7 @@
 	<security:authorize access="isAnonymous()">
 	<jstl:if test="${all}">
 	<jstl:if test="${row.moment < (current)}">
+		<display:column></display:column>
 		
 	</jstl:if>
 	</jstl:if>
