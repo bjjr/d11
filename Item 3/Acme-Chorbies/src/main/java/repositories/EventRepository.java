@@ -18,4 +18,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
 	@Query("select c from Chorbi c join c.events e where e.id = ?1")
 	Collection<Chorbi> findChorbiesByEvent(int eventId);
+
+	@Query("select count(c) from Chorbi c join c.events e where e.id = ?1")
+	Integer findNumChorbiesByEvent(int eventId);
 }

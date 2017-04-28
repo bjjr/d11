@@ -69,6 +69,10 @@
 	
 		<security:intercept-url pattern="/cache/administrator/display.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/cache/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/event/list.do" access="permitAll" />
+		<security:intercept-url pattern="/event/listAvSts.do" access="permitAll" />
+		<security:intercept-url pattern="/event/manager/**" access="hasRole('MANAGER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

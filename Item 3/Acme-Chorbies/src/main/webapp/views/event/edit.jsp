@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="event/edit.do" modelAttribute="event" >
+<form:form action="${action}" modelAttribute="event" >
 	
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
@@ -20,6 +20,6 @@
 	
 	<acme:submit name="save" code="misc.save"/>
 	<acme:delete confirmationCode="misc.confirm.delete" buttonCode="misc.delete" id="${event.id}"/>
-	<acme:cancel url="banner/list.do" code="misc.cancel"/>
+	<acme:cancel url="banner/manager/list.do" code="misc.cancel"/>
 		
 </form:form>
