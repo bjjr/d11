@@ -99,3 +99,58 @@ requestURI="administrator/dashboard.do" id="row">
 	<acme:column code="actor.surname" property="${row.surname}"/>
 
 </display:table>
+
+<h2><spring:message code="administrator.managersSortedByNumberEvents" /></h2>
+
+<display:table pagesize="5" class="displaytag" name="managersSortedByNumberEvents"
+requestURI="administrator/dashboard.do" id="row">
+
+	<acme:column code="actor.name" property="${row.name}"/>
+	<acme:column code="actor.surname" property="${row.surname}"/>
+
+</display:table>
+
+<h2><spring:message code="administrator.managersWithDebts" /></h2>
+
+<jstl:forEach var="entry" items="${managersWithDebts}">
+  <spring:message code="actor.name" /><jstl:out value="${entry[0]}"/>
+  <spring:message code="administrator.managersWithDebts.debt" /><jstl:out value="${entry[1]}"/><br/>
+</jstl:forEach>
+
+<h2><spring:message code="administrator.chorbiesSortedByNumberEvents" /></h2>
+
+<display:table pagesize="5" class="displaytag" name="chorbiesSortedByNumberEvents"
+requestURI="administrator/dashboard.do" id="row">
+
+	<acme:column code="actor.name" property="${row.name}"/>
+	<acme:column code="actor.surname" property="${row.surname}"/>
+
+</display:table>
+
+<h2><spring:message code="administrator.chorbiesWithDebts" /></h2>
+
+<jstl:forEach var="entry" items="${chorbiesWithDebts}">
+  <spring:message code="actor.name" /><jstl:out value="${entry[0]}"/>
+  <spring:message code="administrator.chorbiesWithDebts.debt" /><jstl:out value="${entry[1]}"/><br/>
+</jstl:forEach>
+
+<h2><spring:message code="administrator.avgStarsPerChorbi" /></h2>
+<jstl:out value="${avgStarsPerChorbi}"></jstl:out>
+
+<h2><spring:message code="administrator.maxStarsPerChorbi" /></h2>
+<jstl:out value="${maxStarsPerChorbi}"></jstl:out>
+
+<h2><spring:message code="administrator.minStarsPerChorbi" /></h2>
+<jstl:out value="${minStarsPerChorbi}"></jstl:out>
+
+<h2><spring:message code="administrator.chorbiesSortedByAvgStars" /></h2>
+
+<display:table pagesize="5" class="displaytag" name="chorbiesSortedByAvgStars"
+requestURI="administrator/dashboard.do" id="row">
+
+	<acme:column code="actor.name" property="${row.name}"/>
+	<acme:column code="actor.surname" property="${row.surname}"/>
+
+</display:table>
+
+
