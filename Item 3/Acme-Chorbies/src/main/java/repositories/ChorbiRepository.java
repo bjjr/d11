@@ -58,4 +58,14 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select c.id from Chorbi c")
 	List<Integer> findAllId();
+
+	@Query("select c from Chorbi c group by c order by c.events.size desc")
+	Collection<Chorbi> findChorbiesSortedByNumberEvents();
+
+	@Query("select c.user.name, sum(c.amount) from Charge c where c.paid = false and type(c.user)=domain.Chorbi group by c.user")
+	List<String[]> findChorbiesWithDebts();
+
+	@Query("select cl.liked from ChorbiLike cl group by cl.liked order by avg(cl.stars) desc")
+	Collection<Chorbi> findChorbieSortedByAvgStars();
+
 }
