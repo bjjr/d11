@@ -48,6 +48,7 @@
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('CHORBI', 'ADMIN')" />
+		<security:intercept-url pattern="/chorbi/listChorbiesLikedMe.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/chorbi/display.do" access="hasAnyRole('CHORBI', 'ADMIN')" />
 		<security:intercept-url pattern="/chorbi/administrator/ban.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMIN')" />

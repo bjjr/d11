@@ -78,6 +78,39 @@ public class ChorbiController extends AbstractController {
 		return res;
 	}
 
+	// List chorbis who liked me --------------------
+
+	@RequestMapping(value = "/listChorbiesLikedMe", method = RequestMethod.GET)
+	public ModelAndView listChorbiesLikedMe() {
+		ModelAndView res;
+		final Collection<Chorbi> likers;
+		Collection<Chorbi> liked;
+		Chorbi principal;
+		Authority bannedAuth;
+
+		principal = this.chorbiService.findByPrincipal();
+
+		if (principal.getCreditCard() == null) {
+			res = new ModelAndView("redirect:/creditCard/chorbi/display.do?showWarningLikers=true");
+			return res;
+		}
+
+		bannedAuth = new Authority();
+		bannedAuth.setAuthority("BANNED");
+
+		likers = this.chorbiLikeService.findChorbisByLiked(principal.getId());
+		liked = this.chorbiLikeService.findLiked(this.chorbiService.findByPrincipal());
+
+		res = new ModelAndView("chorbi/list");
+
+		res.addObject("chorbies", likers);
+		res.addObject("requestURI", "chorbi/listChorbiesLikedMe.do");
+		res.addObject("liked", liked);
+		res.addObject("bannedAuth", bannedAuth);
+
+		return res;
+	}
+
 	// Display --------------------------------------
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)

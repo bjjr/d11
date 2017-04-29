@@ -7,6 +7,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${showWarningLikers == true}">
+	<spring:message code="creditcard.warning.likers" var="warningLikers" />
+	<jstl:out value="${warningLikers}" />
+	<br />
+	<br />
+</jstl:if>
+
 <jstl:if test="${creditCard == null}">
 	<spring:message code="creditcard.warning" var="warning" />
 	<jstl:out value="${warning}" />

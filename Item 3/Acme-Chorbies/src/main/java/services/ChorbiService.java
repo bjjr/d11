@@ -404,4 +404,12 @@ public class ChorbiService {
 		return res;
 	}
 
+	public Collection<Chorbi> findChorbiesSortNumStars() {
+		Collection<Chorbi> result;
+
+		result = this.chorbiRepository.findChorbiesSortNumStars();
+
+		return result;
+	}
+
 }

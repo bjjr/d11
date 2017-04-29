@@ -164,6 +164,10 @@ public class ChorbiLikeService {
 
 	}
 
+	public Collection<Chorbi> findChorbisByLiked(final int chorbiId) {
+		return this.chorbiLikeRepository.findChorbisByLiked(chorbiId);
+	}
+
 	public Double findAvgLikesPerChorbi() {
 		Double result;
 
@@ -203,6 +207,18 @@ public class ChorbiLikeService {
 			result = minLikes.get(0);
 
 		return result;
+	}
+
+	public Double findAvgStarsPerChorbi() {
+		return this.chorbiLikeRepository.findAvgStarsPerChorbi();
+	}
+
+	public Integer findMaxStarsPerChorbi() {
+		return this.chorbiLikeRepository.findMaxStarsPerChorbi();
+	}
+
+	public Integer findMinStarsPerChorbi() {
+		return this.chorbiLikeRepository.findMinStarsPerChorbi();
 	}
 
 }
