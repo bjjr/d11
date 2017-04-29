@@ -1,6 +1,9 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +21,7 @@ public class ManagerService {
 	// Managed repository ---------------------------
 
 	@Autowired
-	private ManagerRepository	manaagerRepository;
+	private ManagerRepository	managerRepository;
 
 
 	// Supporting services --------------------------
@@ -47,8 +50,24 @@ public class ManagerService {
 	private Manager findByUserAccount(final UserAccount userAccount) {
 		Manager res;
 
-		res = this.manaagerRepository.findByUserAccountId(userAccount.getId());
+		res = this.managerRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(res);
+
+		return res;
+	}
+
+	public Collection<Manager> findManagersSortedByNumberEvents() {
+		Collection<Manager> res;
+
+		res = this.managerRepository.findManagersSortedByNumberEvents();
+
+		return res;
+	}
+
+	public List<String[]> findManagersWithDebts() {
+		List<String[]> res;
+
+		res = this.managerRepository.findManagersWithDebts();
 
 		return res;
 	}
