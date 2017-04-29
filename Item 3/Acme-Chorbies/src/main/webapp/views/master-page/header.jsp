@@ -75,7 +75,7 @@
 			<li><a class="fNiv" href="chorbi/register.do"><spring:message code="master.page.chorbi.register" /></a></li>
 		</security:authorize>
 		
-		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN')">
+		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN', 'MANAGER')">
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message code="master.page.chorbi.list" /></a></li>
 			<li><a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
