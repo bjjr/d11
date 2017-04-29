@@ -35,11 +35,14 @@ public class EventController extends AbstractController {
 	public ModelAndView listAvSts() {
 		ModelAndView res;
 		Collection<Event> events;
+		Boolean all;
 
 		events = this.eventService.findEventsLessOneMonthSeatsAvailables();
+		all = false;
 
 		res = new ModelAndView("event/list");
 		res.addObject("events", events);
+		res.addObject("all", all);
 		res.addObject("requestURI", "event/listAvSts.do");
 
 		return res;
@@ -51,13 +54,16 @@ public class EventController extends AbstractController {
 		ModelAndView res;
 		Collection<Event> events;
 		Date current;
+		Boolean all;
 
 		events = this.eventService.findAll();
 		current = new Date(System.currentTimeMillis());
+		all = true;
 
 		res = new ModelAndView("event/list");
 		res.addObject("events", events);
 		res.addObject("current", current);
+		res.addObject("all", all);
 		res.addObject("requestURI", "event/list.do");
 
 		return res;
