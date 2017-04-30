@@ -30,6 +30,7 @@
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
 					<li><acme:link href="fee/administrator/list.do" code="master.page.fee.list"/></li>
+					<li><acme:link href="charge/administrator/generateCharges.do" code="master.page.charge.generateCharges"/></li>
 					<li><acme:link href="charge/administrator/economicStatistics.do" code="master.page.charge.economicStatistics"/></li>
 				</ul>
 			</li>
@@ -46,6 +47,25 @@
 					<li><acme:link href="userAccount/edit.do" code="master.page.ua.edit" /></li>
 					<li><acme:link href="chirp/chorbi/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
 					<li><acme:link href="chirp/chorbi/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>
+				</ul>
+			</li>
+			<li><a class="fNiv"> 
+					<spring:message code="master.page.profile" /> 
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><acme:link href="j_spring_security_logout" code="master.page.logout" /></li>
 				</ul>
 			</li>
 		</security:authorize>
