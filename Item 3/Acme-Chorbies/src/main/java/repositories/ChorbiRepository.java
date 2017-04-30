@@ -67,5 +67,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select cl.liked from ChorbiLike cl group by cl.liked order by avg(cl.stars) desc")
 	Collection<Chorbi> findChorbieSortedByAvgStars();
+	@Query("select cl.liked from ChorbiLike cl group by cl.liked order by avg(cl.stars) desc")
+	Collection<Chorbi> findChorbiesSortNumStars();
 
 }

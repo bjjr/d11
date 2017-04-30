@@ -24,7 +24,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display() {
+	public ModelAndView display(@RequestParam(required = false) final boolean showWarningLikers) {
 		ModelAndView res;
 		CreditCard creditCard;
 		String maskedNumber;
@@ -40,10 +40,10 @@ public class CreditCardChorbiController extends AbstractController {
 		res = new ModelAndView("creditCard/display");
 		res.addObject("creditCard", creditCard);
 		res.addObject("maskedNumber", maskedNumber);
+		res.addObject("showWarningLikers", showWarningLikers);
 
 		return res;
 	}
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;

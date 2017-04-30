@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BroadcastService;
 import services.ChirpService;
 import services.ChorbiService;
 import controllers.AbstractController;
@@ -24,16 +25,19 @@ public class ChirpChorbiController extends AbstractController {
 	// Services -----------------------------------------------
 
 	@Autowired
-	private ChirpService	chirpService;
+	private ChirpService		chirpService;
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
-	private boolean			isReply;
+	@Autowired
+	private BroadcastService	broadcastService;
 
-	private boolean			isResend;
+	private boolean				isReply;
 
-	private int				recipientId;
+	private boolean				isResend;
+
+	private int					recipientId;
 
 
 	// Constructors -------------------------------------------
@@ -132,6 +136,10 @@ public class ChirpChorbiController extends AbstractController {
 		final ModelAndView result;
 		Collection<Chirp> chirps;
 		Boolean isSent;
+
+		// Check for new broadcasts
+
+		this.broadcastService.findNewBroadcasts(this.chorbiService.findByPrincipal());
 
 		chirps = this.chirpService.findChirpsReceived();
 		isSent = false;

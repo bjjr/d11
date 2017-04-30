@@ -71,14 +71,15 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Chorbi> chorbiesMCS;
 		final List<String[]> numberOfChorbiesPerCountry;
 		final List<String[]> numberOfChorbiesPerCity;
-		Collection<Manager> managersSortedByNumberEvents;
+		final Collection<Manager> managersSortedByNumberEvents;
 		List<String[]> managersWithDebts;
 		Collection<Chorbi> chorbiesSortedByNumberEvents;
 		List<String[]> chorbiesWithDebts;
-		Double avgStarsPerChorbi;
-		Long maxStarsPerChorbi;
-		Long minStarsPerChorbi;
+		final Double avgStarsPerChorbi;
+		final Long maxStarsPerChorbi;
+		final Long minStarsPerChorbi;
 		Collection<Chorbi> chorbiesSortedByAvgStars;
+		final Collection<Chorbi> chorbiesOrderByStars;
 
 		numberOfChorbiesPerCountry = this.chorbiService.findNumberOfChorbiesPerCountry();
 		numberOfChorbiesPerCity = this.chorbiService.findNumberOfChorbiesPerCity();
@@ -109,6 +110,7 @@ public class DashboardAdministratorController extends AbstractController {
 		maxStarsPerChorbi = this.chorbiLikeService.findMaxStarsPerChorbi();
 		minStarsPerChorbi = this.chorbiLikeService.findMinStarsPerChorbi();
 		chorbiesSortedByAvgStars = this.chorbies(this.chorbiService.findChorbieSortedByAvgStars());
+		chorbiesOrderByStars = this.chorbiService.findChorbiesSortNumStars();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
@@ -141,11 +143,14 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("maxStarsPerChorbi", maxStarsPerChorbi);
 		result.addObject("minStarsPerChorbi", minStarsPerChorbi);
 		result.addObject("chorbiesSortedByAvgStars", chorbiesSortedByAvgStars);
+		result.addObject("avgStarsPerChorbi", avgStarsPerChorbi);
+		result.addObject("maxStarsPerChorbi", maxStarsPerChorbi);
+		result.addObject("minStarsPerChorbi", minStarsPerChorbi);
+		result.addObject("chorbiesOrderByStars", chorbiesOrderByStars);
 
 		return result;
 
 	}
-
 	//Ancillary methods -----------------------------------
 	public Collection<Chorbi> chorbies(final Collection<Chorbi> chorbies) {
 		Collection<Chorbi> result;
