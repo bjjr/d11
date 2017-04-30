@@ -26,6 +26,7 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="property" required="true" %>
 <%@ attribute name="sortable" required="false" %>
+<%@ attribute name="style" required="false" %>
 
 <jstl:if test="${sortable == null}">
 	<jstl:set var="sortable" value="false" />
@@ -34,6 +35,6 @@
 <%-- Definition --%>
 
 <spring:message code="${code}" var="var" />
-<display:column  title="${var}" sortable="${sortable}" >
+<display:column  title="${var}" sortable="${sortable}" style="${style }" >
 	<jstl:out value="${property}" />
 </display:column>

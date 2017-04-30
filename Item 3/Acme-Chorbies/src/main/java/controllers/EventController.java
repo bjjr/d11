@@ -57,7 +57,7 @@ public class EventController extends AbstractController {
 		Boolean all;
 
 		events = this.eventService.findAll();
-		current = new Date(System.currentTimeMillis());
+		current = new Date();
 		all = true;
 
 		res = new ModelAndView("event/list");
