@@ -10,10 +10,10 @@ import domain.Fee;
 @Repository
 public interface FeeRepository extends JpaRepository<Fee, Integer> {
 
-	@Query("select f from Fee f where f.feeType = 1")
+	@Query("select f.value from Fee f where f.feeType = 1")
 	Double getFeeManagers();
 
-	@Query("select f from Fee f where f.feeType = 2")
+	@Query("select f.value from Fee f where f.feeType = 2")
 	Double getFeeChorbies();
 
 }
