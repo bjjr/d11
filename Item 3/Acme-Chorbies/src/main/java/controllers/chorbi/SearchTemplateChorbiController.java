@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiLikeService;
 import services.ChorbiService;
 import services.CreditCardService;
 import services.SearchTemplateService;
@@ -40,6 +41,9 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@Autowired
 	private ChorbiService			chorbiService;
+
+	@Autowired
+	private ChorbiLikeService		chorbiLikeService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -91,7 +95,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 			final Collection<Chorbi> chorbiesMatched = this.searchTemplateService.search(searchTemplateCurrentUser);
 
 			res.addObject("chorbies", chorbiesMatched);
-			res.addObject("liked", liked);			
+			res.addObject("liked", liked);
 			res.addObject("requestURI", "searchTemplate/chorbi/search.do");
 		}
 
