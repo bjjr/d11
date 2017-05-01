@@ -1,6 +1,9 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,6 +121,21 @@ public class ManagerService {
 		return res;
 	}
 
+	public Collection<Manager> findManagersSortedByNumberEvents() {
+		Collection<Manager> res;
+
+		res = this.managerRepository.findManagersSortedByNumberEvents();
+
+		return res;
+	}
+
+	public List<String[]> findManagersWithDebts() {
+		List<String[]> res;
+
+		res = this.managerRepository.findManagersWithDebts();
+
+		return res;
+	}
 	private void checkPasswords(final String passwd1, final String passwd2, final BindingResult binding) {
 		if (!passwd1.equals(passwd2) || (passwd1 == null || passwd2 == null))
 			binding.rejectValue("userAccount.password", "chorbi.password.invalid");

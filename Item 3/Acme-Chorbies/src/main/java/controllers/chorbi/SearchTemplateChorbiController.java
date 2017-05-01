@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiLikeService;
+import services.ChorbiService;
 import services.SearchTemplateService;
 import controllers.AbstractController;
 import domain.Chorbi;
@@ -32,6 +34,12 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@Autowired
 	private SearchTemplateService	searchTemplateService;
+
+	@Autowired
+	private ChorbiService			chorbiService;
+
+	@Autowired
+	private ChorbiLikeService		chorbiLikeService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -63,13 +71,16 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search() {
-		ModelAndView view = new ModelAndView("chorbi/list");
+		final ModelAndView view = new ModelAndView("chorbi/list");
+		Collection<Chorbi> liked;
 
-		SearchTemplate searchTemplateCurrentUser = this.searchTemplateService.findSearchTemplateByPrincipal();
+		liked = this.chorbiLikeService.findLiked(this.chorbiService.findByPrincipal());
+		final SearchTemplate searchTemplateCurrentUser = this.searchTemplateService.findSearchTemplateByPrincipal();
 
-		Collection<Chorbi> chorbiesMatched = this.searchTemplateService.search(searchTemplateCurrentUser);
+		final Collection<Chorbi> chorbiesMatched = this.searchTemplateService.search(searchTemplateCurrentUser);
 
 		view.addObject("chorbies", chorbiesMatched);
+		view.addObject("liked", liked);
 		view.addObject("requestURI", "searchTemplate/chorbi/search.do");
 
 		return view;

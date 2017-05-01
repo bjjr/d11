@@ -164,6 +164,10 @@ public class ChorbiLikeService {
 
 	}
 
+	public Collection<Chorbi> findChorbisByLiked(final int chorbiId) {
+		return this.chorbiLikeRepository.findChorbisByLiked(chorbiId);
+	}
+
 	public Double findAvgLikesPerChorbi() {
 		Double result;
 
@@ -203,6 +207,40 @@ public class ChorbiLikeService {
 			result = minLikes.get(0);
 
 		return result;
+	}
+
+	public Double findAvgStarsPerChorbi() {
+		Double res;
+
+		res = this.chorbiLikeRepository.findAvgStarsPerChorbi();
+
+		return res;
+	}
+
+	public Long findMaxStarsPerChorbi() {
+		Long res;
+		List<Long> maxStars;
+
+		res = 0L;
+		maxStars = (List<Long>) this.chorbiLikeRepository.findMaxStarsPerChorbi();
+
+		if (!maxStars.isEmpty())
+			res = maxStars.get(0);
+
+		return res;
+	}
+
+	public Long findMinStarsPerChorbi() {
+		Long res;
+		List<Long> minStars;
+
+		res = 0L;
+		minStars = (List<Long>) this.chorbiLikeRepository.findMinStarsPerChorbi();
+
+		if (!minStars.isEmpty())
+			res = minStars.get(0);
+
+		return res;
 	}
 
 }

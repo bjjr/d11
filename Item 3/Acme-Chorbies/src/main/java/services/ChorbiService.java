@@ -404,4 +404,36 @@ public class ChorbiService {
 		return res;
 	}
 
+	public Collection<Chorbi> findChorbiesSortedByNumberEvents() {
+		Collection<Chorbi> res;
+
+		res = this.chorbiRepository.findChorbiesSortedByNumberEvents();
+
+		return res;
+	}
+
+	public List<String[]> findChorbiesWithDebts() {
+		List<String[]> res;
+
+		res = this.chorbiRepository.findChorbiesWithDebts();
+
+		return res;
+	}
+
+	public Collection<Chorbi> findChorbieSortedByAvgStars() {
+		Collection<Chorbi> res;
+
+		res = this.chorbiRepository.findChorbieSortedByAvgStars();
+
+		return res;
+	}
+
+	public Collection<Chorbi> findChorbiesSortNumStars() {
+		Collection<Chorbi> result;
+
+		result = this.chorbiRepository.findChorbiesSortNumStars();
+
+		return result;
+	}
+
 }

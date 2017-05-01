@@ -48,12 +48,15 @@
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('CHORBI', 'ADMIN')" />
+		<security:intercept-url pattern="/chorbi/listChorbiesLikedMe.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/chorbi/display.do" access="hasAnyRole('CHORBI', 'ADMIN')" />
 		<security:intercept-url pattern="/chorbi/administrator/ban.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/chorbiLike/chorbi/**" access="hasRole('CHORBI')" />
 		
 		<security:intercept-url pattern="/dashboard/administrator/dashboard.do" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/fee/administrator/**" access="hasRole('ADMIN')" />
 	
 		<security:intercept-url pattern="/banner/**" access="hasRole('ADMIN')" />
@@ -67,10 +70,10 @@
 		<security:intercept-url pattern="/searchTemplate/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/searchTemplate/chorbi/search.do" access="hasRole('CHORBI')" />
 	
-		<security:intercept-url pattern="/cache/administrator/display.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/cache/administrator/edit.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/event/list.do" access="isAnonymous()" /> 
-		<security:intercept-url pattern="/event/listAvSts.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/cache/administrator/**" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/event/list.do" access="isAnonymous() or hasAnyRole('CHORBI', 'MANAGER', 'ADMIN')" /> 
+		<security:intercept-url pattern="/event/listAvSts.do" access="isAnonymous() or hasAnyRole('CHORBI', 'MANAGER', 'ADMIN')" /> 
 		<security:intercept-url pattern="/event/chorbi/list.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/event/manager/**" access="hasRole('MANAGER')" />
 	

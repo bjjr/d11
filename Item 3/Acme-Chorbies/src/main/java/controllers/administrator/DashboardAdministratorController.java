@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ChirpService;
 import services.ChorbiLikeService;
 import services.ChorbiService;
+import services.ManagerService;
 import controllers.AbstractController;
 import domain.Chorbi;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
@@ -31,6 +33,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ChorbiLikeService	chorbiLikeService;
+
+	@Autowired
+	private ManagerService		managerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -66,6 +71,15 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Chorbi> chorbiesMCS;
 		final List<String[]> numberOfChorbiesPerCountry;
 		final List<String[]> numberOfChorbiesPerCity;
+		final Collection<Manager> managersSortedByNumberEvents;
+		List<String[]> managersWithDebts;
+		Collection<Chorbi> chorbiesSortedByNumberEvents;
+		List<String[]> chorbiesWithDebts;
+		final Double avgStarsPerChorbi;
+		final Long maxStarsPerChorbi;
+		final Long minStarsPerChorbi;
+		Collection<Chorbi> chorbiesSortedByAvgStars;
+		final Collection<Chorbi> chorbiesOrderByStars;
 
 		numberOfChorbiesPerCountry = this.chorbiService.findNumberOfChorbiesPerCountry();
 		numberOfChorbiesPerCity = this.chorbiService.findNumberOfChorbiesPerCity();
@@ -88,6 +102,15 @@ public class DashboardAdministratorController extends AbstractController {
 		minChirpsSendChorbi = this.chirpService.findMinChirpsSendPerChorbi();
 		chorbiesMCR = this.chorbies(this.chorbiService.findChorbiesMoreChirpsRec());
 		chorbiesMCS = this.chorbies(this.chorbiService.findChorbiesMoreChirpsSend());
+		managersSortedByNumberEvents = this.managers(this.managerService.findManagersSortedByNumberEvents());
+		managersWithDebts = this.managerService.findManagersWithDebts();
+		chorbiesSortedByNumberEvents = this.chorbies(this.chorbiService.findChorbiesSortedByNumberEvents());
+		chorbiesWithDebts = this.chorbiService.findChorbiesWithDebts();
+		avgStarsPerChorbi = this.chorbiLikeService.findAvgStarsPerChorbi();
+		maxStarsPerChorbi = this.chorbiLikeService.findMaxStarsPerChorbi();
+		minStarsPerChorbi = this.chorbiLikeService.findMinStarsPerChorbi();
+		chorbiesSortedByAvgStars = this.chorbies(this.chorbiService.findChorbieSortedByAvgStars());
+		chorbiesOrderByStars = this.chorbiService.findChorbiesSortNumStars();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("requestURI", "dashboard/administrator/dashboard.do");
@@ -112,11 +135,22 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("minChirpsSendChorbi", minChirpsSendChorbi);
 		result.addObject("chorbiesMCR", chorbiesMCR);
 		result.addObject("chorbiesMCS", chorbiesMCS);
+		result.addObject("managersSortedByNumberEvents", managersSortedByNumberEvents);
+		result.addObject("managersWithDebts", managersWithDebts);
+		result.addObject("chorbiesSortedByNumberEvents", chorbiesSortedByNumberEvents);
+		result.addObject("chorbiesWithDebts", chorbiesWithDebts);
+		result.addObject("avgStarsPerChorbi", avgStarsPerChorbi);
+		result.addObject("maxStarsPerChorbi", maxStarsPerChorbi);
+		result.addObject("minStarsPerChorbi", minStarsPerChorbi);
+		result.addObject("chorbiesSortedByAvgStars", chorbiesSortedByAvgStars);
+		result.addObject("avgStarsPerChorbi", avgStarsPerChorbi);
+		result.addObject("maxStarsPerChorbi", maxStarsPerChorbi);
+		result.addObject("minStarsPerChorbi", minStarsPerChorbi);
+		result.addObject("chorbiesOrderByStars", chorbiesOrderByStars);
 
 		return result;
 
 	}
-
 	//Ancillary methods -----------------------------------
 	public Collection<Chorbi> chorbies(final Collection<Chorbi> chorbies) {
 		Collection<Chorbi> result;
@@ -125,6 +159,17 @@ public class DashboardAdministratorController extends AbstractController {
 
 		if (chorbies != null)
 			result.addAll(chorbies);
+
+		return result;
+	}
+
+	public Collection<Manager> managers(final Collection<Manager> managers) {
+		Collection<Manager> result;
+
+		result = new ArrayList<Manager>();
+
+		if (managers != null)
+			result.addAll(managers);
 
 		return result;
 	}
