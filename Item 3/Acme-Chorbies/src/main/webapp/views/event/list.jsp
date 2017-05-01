@@ -27,7 +27,7 @@
 	<jstl:choose>
 
 		<jstl:when
-			test="${currentYear lt momentYear or (currentYear eq momentYear and currentMonth lt momentMonth) or (currentYear eq momentYear and currentMonth eq momentMonth and currentDay le momentDay)}">
+			test="${currentYear lt momentYear or (currentYear eq momentYear and currentMonth lt momentMonth)}">
 
 			<!-- Attributes -->
 			<acme:column code="event.title" property="${row.title}" />
@@ -46,6 +46,35 @@
 			<acme:column code="actor.name" property="${row.manager.name}" />
 
 		</jstl:when>
+
+		<jstl:when
+			test="${currentYear eq momentYear and currentMonth eq momentMonth and currentDay le momentDay}">
+
+		<!-- Attributes -->
+			<acme:column code="event.title" property="${row.title}"
+				style="background-color:yellow;" />
+
+			<acme:column code="event.moment" property="${row.moment}"
+				style="background-color:yellow;" />
+
+			<acme:column code="event.description" property="${row.description}"
+				style="background-color:yellow;" />
+
+			<acme:column code="event.picture" property="${row.picture}"
+				style="background-color:yellow;" />
+
+			<acme:column code="event.seats" property="${row.seats}"
+				style="background-color:yellow;" />
+
+			<acme:column code="event.availableSeats"
+				property="${row.availableSeats}" style="background-color:yellow;" />
+
+			<acme:column code="actor.name" property="${row.manager.name}"
+				style="background-color:yellow;" />
+
+		</jstl:when>
+
+
 		<jstl:when
 			test="${currentYear gt momentYear or (currentYear eq momentYear and currentMonth gt momentMonth) or (currentYear eq momentYear and currentMonth eq momentMonth and currentDay gt momentDay)}">
 
