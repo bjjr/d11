@@ -44,8 +44,8 @@
 					<li><acme:link href="searchTemplate/chorbi/search.do" code="master.page.chorbi.search" /></li>
 					<li><acme:link href="searchTemplate/chorbi/edit.do" code="master.page.chorbi.editSearchTemplate" /></li>
 					<li><acme:link href="userAccount/edit.do" code="master.page.ua.edit" /></li>
-					<li><acme:link href="chirp/chorbi/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
-					<li><acme:link href="chirp/chorbi/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
+					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="chorbi/listChorbiesLikedMe.do"><spring:message code="master.page.chorbi.list.likers" /></a></li>
@@ -67,6 +67,8 @@
 					<li class="arrow"></li>
 					<li><acme:link href="event/manager/list.do" code="master.page.manager.event.list"/></li>
 					<li><acme:link href="event/manager/create.do" code="master.page.manager.event.create"/></li>
+					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
+					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
 				</ul>
 			</li>
 		</security:authorize>

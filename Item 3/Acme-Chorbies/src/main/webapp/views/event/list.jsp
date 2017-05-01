@@ -15,17 +15,21 @@
 	name="events" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
+
+	<spring:message code="event.picture" var="pic" />
+	<display:column  title="${pic}">
+		<img src="${row.picture}" style="max-width: 150px; max-height: 150px;" />
+	</display:column>
+	
 	<acme:column code="event.title" property="${row.title}"/>
 	
 	<acme:column code="event.moment" property="${row.moment}"/>
 	
 	<acme:column code="event.description" property="${row.description}"/>
 	
-	<acme:column code="event.picture" property="${row.picture}"/>
-	
 	<acme:column code="event.seats" property="${row.seats}"/>
 	
-	<acme:column code="event.availableSeats" property="${row.availableSeats}"/>
+	<acme:column code="event.availableSeats" property="${row.availableSeats}" sortable="true"/>
 	
 	<acme:column code="actor.name" property="${row.manager.name}" />
 
@@ -37,7 +41,33 @@
 	</jstl:if>
 	</jstl:if>
 	</security:authorize>
-
+	
+	<security:authorize access="hasRole('CHORBI')">
+		<jstl:if test="${chorbiEvents != null}">
+			<jstl:if test="${row.moment > current && !chorbiEvents.contains(row)}">
+				<display:column>
+					<acme:link href="event/chorbi/register.do?eventId=${row.id}" code="event.register"/>
+				</display:column>
+			</jstl:if>
+			
+			<jstl:if test="${row.moment > current && chorbiEvents.contains(row)}">
+				<display:column>
+					 <acme:link href="event/chorbi/unregister.do?eventId=${row.id}" code="event.unregister"/>
+				</display:column>
+			</jstl:if>
+		</jstl:if>
+	</security:authorize>
+	
+	<jstl:if test="${isManagerView}">
+		<display:column>
+			<acme:link href="event/manager/edit.do?eventId=${row.id}" code="event.edit"/>
+		</display:column>
+	</jstl:if>
+	
 </display:table>
 
 <br />
+
+<security:authorize access="hasRole('MANAGER')">
+	<acme:link href="event/manager/create.do" code="master.page.manager.event.create"/>
+</security:authorize>

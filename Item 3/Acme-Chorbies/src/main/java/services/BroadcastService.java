@@ -28,6 +28,9 @@ public class BroadcastService {
 	@Autowired
 	private ChirpService		chirpService;
 
+	@Autowired
+	private UserService			userService;
+
 
 	// Constructor ----------------------------------
 
@@ -113,6 +116,7 @@ public class BroadcastService {
 
 			b.getUninformedChorbies().remove(chorbi);
 			this.update(b);
+			this.userService.save(b.getManager());
 		}
 
 		for (final Chirp c : chirps)

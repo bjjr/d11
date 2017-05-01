@@ -44,6 +44,16 @@ public class ChargeService {
 		return result;
 	}
 
+	public Charge save(final Charge charge) {
+		Assert.notNull(charge);
+
+		Charge result;
+
+		result = this.chargeRepository.save(charge);
+
+		return result;
+	}
+
 	public Charge findOne(final int chargeId) {
 		Charge result;
 

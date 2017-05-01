@@ -3,8 +3,6 @@ package controllers.manager;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BroadcastService;
 import services.EventService;
+import services.ManagerService;
 import controllers.AbstractController;
+import domain.Broadcast;
 import domain.Event;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/event/manager")
@@ -24,7 +26,13 @@ public class EventManagerController extends AbstractController {
 	// Services -----------------------------------------------------------
 
 	@Autowired
-	private EventService	eventService;
+	private EventService		eventService;
+
+	@Autowired
+	private ManagerService		managerService;
+
+	@Autowired
+	private BroadcastService	broadcastService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -39,12 +47,15 @@ public class EventManagerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 		Collection<Event> events;
+		Manager principal;
 
-		events = this.eventService.findAll();
+		principal = this.managerService.findByPrincipal();
+		events = this.eventService.findManagerEvents(principal.getId());
 
 		res = new ModelAndView("event/list");
 		res.addObject("events", events);
 		res.addObject("requestURI", "event/manager/list.do");
+		res.addObject("isManagerView", true);
 
 		return res;
 
@@ -81,14 +92,17 @@ public class EventManagerController extends AbstractController {
 	// Save -----------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Event event, final BindingResult binding) {
+	public ModelAndView save(final Event event, final BindingResult binding) {
 		ModelAndView res;
+		Event reconstructed;
+
+		reconstructed = this.eventService.reconstruct(event, binding);
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(event, false);
+			res = this.createEditModelAndView(reconstructed, false);
 		else
 			try {
-				this.eventService.save(event);
+				this.eventService.save(reconstructed);
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable th) {
 				res = this.createEditModelAndView(event, "misc.commit.error", false);
@@ -108,7 +122,10 @@ public class EventManagerController extends AbstractController {
 			res = this.createEditModelAndView(reconstructed, true);
 		else
 			try {
+				Broadcast broadcast;
+				broadcast = this.eventService.getModificationsBroadcast(reconstructed);
 				this.eventService.save(reconstructed);
+				this.broadcastService.update(broadcast);
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable th) {
 				res = this.createEditModelAndView(event, "misc.commit.error", true);
@@ -146,9 +163,9 @@ public class EventManagerController extends AbstractController {
 		result = new ModelAndView("event/edit");
 
 		if (isEdit)
-			result.addObject("action", "event/edit.do");
+			result.addObject("action", "event/manager/edit.do");
 		else
-			result.addObject("action", "event/create.do");
+			result.addObject("action", "event/manager/create.do");
 
 		result.addObject("event", event);
 		result.addObject("message", message);

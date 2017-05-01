@@ -30,7 +30,7 @@ public class CreditCardChorbiController extends AbstractController {
 		String maskedNumber;
 
 		try {
-			creditCard = this.creditCardService.findChorbiCreditCard();
+			creditCard = this.creditCardService.findUserCreditCard();
 			maskedNumber = this.creditCardService.getMaskedNumber(creditCard);
 		} catch (final IllegalArgumentException e) {
 			creditCard = null;
