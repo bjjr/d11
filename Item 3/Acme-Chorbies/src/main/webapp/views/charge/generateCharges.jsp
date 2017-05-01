@@ -10,8 +10,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h3><spring:message code="charge.totalBenefit" />: <jstl:out value="${totalBenefit}"></jstl:out></h3>
-
-<h3><spring:message code="charge.totalDue" />: <jstl:out value="${totalDue}"></jstl:out></h3>
-
-<h3><spring:message code="charge.theoreticalBenefit" />: <jstl:out value="${theoreticalBenefit}"></jstl:out></h3>
+ <form:form action="charge/administrator/generateCharges.do">
+ 
+ 	<button type="submit" name="generate" onclick="return confirm('<spring:message code="charge.confirm.generate" />')">
+ 		<spring:message code="charge.generateCharges"/>
+ 	</button>
+ 
+ </form:form>

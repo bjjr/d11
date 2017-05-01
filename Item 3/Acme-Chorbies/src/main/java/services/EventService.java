@@ -45,9 +45,6 @@ public class EventService {
 	private CreditCardService	creditCardService;
 
 	@Autowired
-	private FeeService			feeService;
-
-	@Autowired
 	private ChargeService		chargeService;
 
 	// Validator -----------------------------------
@@ -94,13 +91,10 @@ public class EventService {
 
 		if (event.getId() == 0) {
 			Charge charge;
-			Double fee;
+			Manager principal;
 
-			charge = this.chargeService.create();
-			fee = this.feeService.getFeeManagers();
-
-			charge.setAmount(fee);
-			charge.setUser(event.getManager());
+			principal = this.managerService.findByPrincipal();
+			charge = this.chargeService.create(principal);
 
 			this.chargeService.save(charge);
 		}

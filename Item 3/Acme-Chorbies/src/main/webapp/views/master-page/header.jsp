@@ -30,6 +30,7 @@
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
 					<li><acme:link href="fee/administrator/list.do" code="master.page.fee.list"/></li>
+					<li><acme:link href="charge/administrator/generateCharges.do" code="master.page.charge.generateCharges"/></li>
 					<li><acme:link href="charge/administrator/economicStatistics.do" code="master.page.charge.economicStatistics"/></li>
 				</ul>
 			</li>
@@ -46,6 +47,7 @@
 					<li><acme:link href="userAccount/edit.do" code="master.page.ua.edit" /></li>
 					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
 					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>					
 					<li><acme:link href="event/chorbi/list.do" code="master.page.chorbi.event.list" /></li>
 				</ul>	
 			</li>
@@ -71,6 +73,7 @@
 					<li><acme:link href="creditCard/display.do" code="master.page.chorbi.editCreditCard" /></li>
 					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
 					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>
 				</ul>
 			</li>
 		</security:authorize>

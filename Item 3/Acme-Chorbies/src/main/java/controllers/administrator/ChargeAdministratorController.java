@@ -26,7 +26,33 @@ public class ChargeAdministratorController extends AbstractController {
 		super();
 	}
 
-	// Benefit ------------------------------------------------
+	// Generate charges ---------------------------------------
+
+	@RequestMapping(value = "/generateCharges", method = RequestMethod.GET)
+	public ModelAndView generateCharges() {
+		final ModelAndView result;
+
+		result = new ModelAndView("charge/generateCharges");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/generateCharges", method = RequestMethod.POST, params = "generate")
+	public ModelAndView generate() {
+		ModelAndView result;
+
+		try {
+			this.chargeService.generateChargesToChorbies();
+			result = new ModelAndView("redirect:/charge/administrator/generateCharges.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/charge/administrator/generateCharges.do");
+			result.addObject("misc.commit.error");
+		}
+
+		return result;
+	}
+
+	// Economic statistics ------------------------------------
 
 	@RequestMapping(value = "/economicStatistics", method = RequestMethod.GET)
 	public ModelAndView economicStatistics() {
@@ -40,7 +66,7 @@ public class ChargeAdministratorController extends AbstractController {
 		totalDue = this.chargeService.totalDue();
 		theoreticalBenefit = this.chargeService.theoreticalBenefit();
 
-		result = new ModelAndView("administrator/economicStatistics");
+		result = new ModelAndView("charge/economicStatistics");
 
 		result.addObject("totalBenefit", totalBenefit);
 		result.addObject("totalDue", totalDue);

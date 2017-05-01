@@ -60,6 +60,7 @@ public class ChargeUserController extends AbstractController {
 			result = new ModelAndView("redirect:/charge/user/list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/charge/user/list.do");
+			result.addObject("misc.commit.error");
 		}
 
 		return result;

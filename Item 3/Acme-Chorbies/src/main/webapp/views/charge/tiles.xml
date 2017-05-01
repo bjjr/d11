@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/charge/list.jsp" />
 	</definition>
 	
+	<definition name="charge/generateCharges" extends="master.page">	
+		<put-attribute name="title" value="Generate charges to chorbies" />
+		<put-attribute name="body" value="/views/charge/generateCharges.jsp" />
+	</definition>
+	
 	<definition name="charge/economicStatistics" extends="master.page">	
 		<put-attribute name="title" value="Economic statistics" />
 		<put-attribute name="body" value="/views/charge/economicStatistics.jsp" />

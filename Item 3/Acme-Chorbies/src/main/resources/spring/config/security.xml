@@ -42,6 +42,7 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/charge/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/charge/user/**" access="hasAnyRole('CHORBI', 'MANAGER')" />
 
 		<security:intercept-url pattern="/chirp/**" access="hasAnyRole('CHORBI', 'MANAGER')" /> 
 		
