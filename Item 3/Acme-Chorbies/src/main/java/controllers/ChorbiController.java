@@ -91,7 +91,7 @@ public class ChorbiController extends AbstractController {
 		principal = this.chorbiService.findByPrincipal();
 
 		if (principal.getCreditCard() == null) {
-			res = new ModelAndView("redirect:/creditCard/chorbi/display.do?showWarningLikers=true");
+			res = new ModelAndView("redirect:/creditCard/display.do?showWarning=true");
 			return res;
 		}
 

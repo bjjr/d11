@@ -14,10 +14,10 @@ import domain.Chirp;
 public interface ChirpRepository extends JpaRepository<Chirp, Integer> {
 
 	@Query("select c from Chirp c where c.copy = false and c.sender.id = ?1")
-	Collection<Chirp> findChirpsSent(int chorbiId);
+	Collection<Chirp> findChirpsSent(int userId);
 
 	@Query("select c from Chirp c where c.copy = true and c.recipient.id = ?1")
-	Collection<Chirp> findChirpsReceived(int chorbiId);
+	Collection<Chirp> findChirpsReceived(int userId);
 
 	@Query("select count(cp)*1.0/(select count(c) from Chorbi c) from Chirp cp where cp.copy is true")
 	Double findAvgChirpsRecPerChorbi();

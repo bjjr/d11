@@ -13,8 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CreditCardRepository;
-import domain.Chorbi;
 import domain.CreditCard;
+import domain.User;
 
 @Service
 @Transactional
@@ -24,7 +24,7 @@ public class CreditCardService {
 	private CreditCardRepository	creditCardRepository;
 
 	@Autowired
-	private ChorbiService			chorbiService;
+	private UserService				userService;
 
 	@Autowired
 	private Validator				validator;
@@ -45,11 +45,11 @@ public class CreditCardService {
 
 	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard);
-		final Chorbi chorbi;
-		final CreditCard res;
+		User user;
+		CreditCard res;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi, "You are not logged as a Chorbi");
+		user = this.userService.findByPrincipal();
+		Assert.notNull(user, "You are not logged as an User");
 
 		// Save Brand in Uppercase
 		creditCard.setBrand(creditCard.getBrand().toUpperCase());
@@ -59,8 +59,8 @@ public class CreditCardService {
 
 		res = this.creditCardRepository.save(creditCard);
 		if (creditCard.getId() == 0) {
-			chorbi.setCreditCard(res);
-			this.chorbiService.save(chorbi);
+			user.setCreditCard(res);
+			this.userService.save(user);
 		}
 
 		return res;
@@ -83,11 +83,11 @@ public class CreditCardService {
 	}
 
 	public CreditCard reconstruct(final CreditCard creditCard, final BindingResult bindingResult) {
-		final Chorbi chorbi;
-		final CreditCard res;
+		User user;
+		CreditCard res;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi, "You are not logged as a Chorbi");
+		user = this.userService.findByPrincipal();
+		Assert.notNull(user, "You are not logged as an User");
 
 		res = creditCard;
 
@@ -160,29 +160,29 @@ public class CreditCardService {
 			return false;
 	}
 
-	public CreditCard findChorbiCreditCard() {
-		Chorbi chorbi;
+	public CreditCard findUserCreditCard() {
+		User user;
 		CreditCard creditCard;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi, "You are not logged as a Chorbi");
+		user = this.userService.findByPrincipal();
+		Assert.notNull(user, "You are not logged as an User");
 
-		creditCard = this.creditCardRepository.findCreditCardByChorbi(chorbi.getId());
+		creditCard = this.creditCardRepository.findCreditCardByUser(user.getId());
 		Assert.notNull(creditCard);
 
 		return creditCard;
 	}
 
 	public CreditCard findCreditCardToEdit(final int creditCardId) {
-		Chorbi chorbi;
+		User user;
 		CreditCard creditCard;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi, "You are not logged as a Chorbi");
+		user = this.userService.findByPrincipal();
+		Assert.notNull(user, "You are not logged as a user");
 
 		creditCard = this.findOne(creditCardId);
 		Assert.notNull(creditCard, "The credit card does not exist");
-		Assert.isTrue(this.findChorbiCreditCard().equals(creditCard), "This is not your credit card");
+		Assert.isTrue(this.findUserCreditCard().equals(creditCard), "This is not your credit card");
 
 		return creditCard;
 	}

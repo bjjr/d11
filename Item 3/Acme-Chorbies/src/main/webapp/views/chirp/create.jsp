@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="chirp/chorbi/send.do" modelAttribute="chirp" >
+<form:form action="chirp/send.do" modelAttribute="chirp" >
 	
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
@@ -22,7 +22,7 @@
 		<acme:submit name="resend" code="chirp.resend"/>
 		<input type="button" name="cancel"
 				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/chorbi/listSent.do'" />
+				onclick="window.location='chirp/listSent.do'" />
 	</jstl:if>
 	
 	<jstl:if test="${!isResend}">
@@ -42,14 +42,14 @@
 			<acme:submit name="reply" code="chirp.reply"/>
 			<input type="button" name="cancel"
 				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/chorbi/listReceived.do'" />
+				onclick="window.location='chirp/listReceived.do'" />
 		</jstl:if>
 		
 		<jstl:if test="${!isReply}">
 			<acme:submit name="send" code="chirp.send"/>
 			<input type="button" name="cancel"
 				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/chorbi/listSent.do'" />
+				onclick="window.location='chirp/listSent.do'" />
 		</jstl:if>
 	</jstl:if>
 	

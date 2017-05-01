@@ -7,13 +7,28 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="creditCard/chorbi/edit.do" modelAttribute="creditCard" >
+<form:form action="creditCard/edit.do" modelAttribute="creditCard" >
 	
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	
 	<acme:textbox code="creditcard.holder" path="holder" />
-	<acme:textbox code="creditcard.brand" path="brand" />
+	
+	<div>
+		<form:label path="brand">
+			<spring:message code="creditcard.brand" />
+		</form:label>
+		
+		<form:select path="brand">
+			<form:option value="" label="----" />
+			<form:option value="VISA" label="VISA" />
+			<form:option value="MASTERCARD" label="MASTERCARD" />
+			<form:option value="DISCOVER" label="DISCOVER" />
+			<form:option value="DINNERS" label="DINNERS" />
+			<form:option value="AMEX" label="AMEX" />
+		</form:select>
+	</div>
+
 	<acme:textbox code="creditcard.number" path="number"/>
 	<acme:textbox code="creditcard.cvv" path="cvv" size="3" />
 	
@@ -25,6 +40,6 @@
 	
 	<div>
 		<acme:submit name="save" code="misc.save"/>
-		<acme:cancel url="creditCard/chorbi/display.do" code="misc.cancel"/>
+		<acme:cancel url="creditCard/display.do" code="misc.cancel"/>
 	</div>
 </form:form>

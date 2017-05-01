@@ -90,7 +90,7 @@
 		</display:column>
 		
 		<display:column>
-			<acme:link href="chirp/chorbi/create.do?recipientId=${row.id}" code="chirp.create"/>
+			<acme:link href="chirp/create.do?recipientId=${row.id}" code="chirp.create"/>
 		</display:column>
 	</security:authorize>
 

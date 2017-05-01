@@ -27,6 +27,9 @@ public class SearchTemplateService {
 	@Autowired
 	private ChorbiService				chorbiService;
 
+	@Autowired
+	private CreditCardService			creditCardService;
+
 
 	public SearchTemplate create() {
 		final SearchTemplate searchTemplateResult = new SearchTemplate();
@@ -97,6 +100,7 @@ public class SearchTemplateService {
 		Assert.notNull(loggedChorbi, "SearchTemplateService.search: The logged user cannot be null");
 
 		Assert.notNull(loggedChorbi.getCreditCard(), "SearchTemplateService.search: You need a valid creditcard in order to perform a search");
+		Assert.isTrue(this.creditCardService.isCreditCardDateValid(loggedChorbi.getCreditCard()));
 
 		return this.findChorbiesBySearchTemplate(searchTemplate);
 	}

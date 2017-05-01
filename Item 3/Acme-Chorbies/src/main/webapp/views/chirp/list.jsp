@@ -41,7 +41,7 @@
 		<acme:column code="chirp.recipient" property="${row.recipient.userAccount.username}"/>
 		
 		<display:column>
-			<a href="chirp/chorbi/resend.do?chirpId=${row.id}"><spring:message code="chirp.resend" /></a>
+			<a href="chirp/resend.do?chirpId=${row.id}"><spring:message code="chirp.resend" /></a>
 		</display:column>
 	</jstl:if>
 	
@@ -49,12 +49,12 @@
 		<acme:column code="chirp.sender" property="${row.sender.userAccount.username}"/>
 		
 		<display:column>
-			<a href="chirp/chorbi/reply.do?chirpId=${row.id}"><spring:message code="chirp.reply" /></a>
+			<a href="chirp/reply.do?chirpId=${row.id}"><spring:message code="chirp.reply" /></a>
 		</display:column>
 	</jstl:if>
 	
 	<display:column>
-		<a href="chirp/chorbi/delete.do?chirpId=${row.id}" onclick="return confirm('<spring:message code="misc.confirm.delete" />')"><spring:message code="misc.delete" /></a>
+		<a href="chirp/delete.do?chirpId=${row.id}" onclick="return confirm('<spring:message code="misc.confirm.delete" />')"><spring:message code="misc.delete" /></a>
 	</display:column>
 
 </display:table>
