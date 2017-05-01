@@ -17,7 +17,7 @@
 <jstl:if test="${creditCard == null}">
 	<spring:message code="creditcard.warning" var="warning" />
 	<jstl:out value="${warning}" />
-	<acme:link code="creditcard.register" href="creditCard/chorbi/create.do" />
+	<acme:link code="creditcard.register" href="creditCard/create.do" />
 </jstl:if>
 
 <jstl:if test="${creditCard != null}" >
@@ -32,6 +32,6 @@
 	<acme:display code="creditcard.month" property="${creditCard.month}"/>
 	<acme:display code="creditcard.year" property="${creditCard.year}"/>
 
-	<acme:link code="creditcard.edit" href="creditCard/chorbi/edit.do?creditCardId=${creditCard.id}" />
+	<acme:link code="creditcard.edit" href="creditCard/edit.do?creditCardId=${creditCard.id}" />
 </jstl:if>
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BroadcastService;
+import services.CreditCardService;
 import services.EventService;
 import services.ManagerService;
 import controllers.AbstractController;
@@ -33,6 +34,9 @@ public class EventManagerController extends AbstractController {
 
 	@Autowired
 	private BroadcastService	broadcastService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -67,10 +71,18 @@ public class EventManagerController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView res;
 		Event event;
+		Manager principal;
 
-		event = this.eventService.create();
+		principal = this.managerService.findByPrincipal();
 
-		res = this.createEditModelAndView(event, false);
+		if (principal.getCreditCard() == null)
+			res = new ModelAndView("redirect:/creditCard/display.do?showWarning=true");
+		else if (!this.creditCardService.isCreditCardDateValid(principal.getCreditCard()))
+			res = new ModelAndView("redirect:/creditCard/display.do?showWarning=true");
+		else {
+			event = this.eventService.create();
+			res = this.createEditModelAndView(event, false);
+		}
 
 		return res;
 	}
