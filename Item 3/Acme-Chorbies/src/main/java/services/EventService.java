@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -358,6 +359,16 @@ public class EventService {
 		return res;
 	}
 
+	public Collection<Chorbi> findChorbiesByManagerEvents(final Manager manager) {
+		final Collection<Event> events = this.findManagerEvents(manager.getId());
+
+		final Collection<Chorbi> allChorbiesByManagerEvent = new HashSet<>();
+
+		for (final Event e : events)
+			allChorbiesByManagerEvent.addAll(this.findChorbiesByEvent(e.getId()));
+
+		return allChorbiesByManagerEvent;
+	}
 	public Collection<Event> findEventsLessOneMonthSeatsAvailables() {
 		Collection<Event> res;
 

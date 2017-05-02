@@ -70,6 +70,7 @@
 					<li class="arrow"></li>
 					<li><acme:link href="event/manager/list.do" code="master.page.manager.event.list"/></li>
 					<li><acme:link href="event/manager/create.do" code="master.page.manager.event.create"/></li>
+					<li><acme:link href="broadcast/manager/create.do" code="master.page.manager.broadast.create"/></li>
 					<li><acme:link href="creditCard/display.do" code="master.page.chorbi.editCreditCard" /></li>
 					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
 					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
