@@ -13,7 +13,7 @@ import domain.Event;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
-	@Query("select e from Event e where ((SUBSTRING(e.moment, 1, 4) == SUBSTRING(CURRENT_DATE, 1, 4)) and ((SUBSTRING(e.moment, 6, 2) - SUBSTRING(CURRENT_DATE, 6, 2) < 1) and (e.availableSeats > 0))")
+	@Query("select e from Event e where FUNCTION('DATEDIFF', e.moment, CURRENT_DATE) <= 30 and FUNCTION('DATEDIFF', e.moment, CURRENT_DATE) > 0 and e.availableSeats > 0")
 	Collection<Event> findEventsLessOneMonthSeatsAvailables();
 
 	@Query("select c from Chorbi c join c.events e where e.id = ?1")
@@ -21,4 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
 	@Query("select count(c) from Chorbi c join c.events e where e.id = ?1")
 	Integer findNumChorbiesByEvent(int eventId);
+
+	@Query("select e from Event e where e.manager.id = ?1")
+	Collection<Event> findManagerEvents(int managerId);
 }

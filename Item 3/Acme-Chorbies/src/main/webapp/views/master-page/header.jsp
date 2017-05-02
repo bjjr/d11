@@ -30,6 +30,7 @@
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
 					<li><acme:link href="fee/administrator/list.do" code="master.page.fee.list"/></li>
+					<li><acme:link href="charge/administrator/generateCharges.do" code="master.page.charge.generateCharges"/></li>
 					<li><acme:link href="charge/administrator/economicStatistics.do" code="master.page.charge.economicStatistics"/></li>
 				</ul>
 			</li>
@@ -40,13 +41,15 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><acme:link href="chorbi/edit.do" code="master.page.chorbi.edit" /></li>
-					<li><a href="creditCard/chorbi/display.do"><spring:message code="master.page.chorbi.editCreditCard" /></a></li>
+					<li><acme:link href="creditCard/display.do" code="master.page.chorbi.editCreditCard" /></li>
 					<li><acme:link href="searchTemplate/chorbi/search.do" code="master.page.chorbi.search" /></li>
 					<li><acme:link href="searchTemplate/chorbi/edit.do" code="master.page.chorbi.editSearchTemplate" /></li>
 					<li><acme:link href="userAccount/edit.do" code="master.page.ua.edit" /></li>
-					<li><acme:link href="chirp/chorbi/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
-					<li><acme:link href="chirp/chorbi/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
-				</ul>
+					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
+					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>					
+					<li><acme:link href="event/chorbi/list.do" code="master.page.chorbi.event.list" /></li>
+				</ul>	
 			</li>
 			<li><a class="fNiv" href="chorbi/listChorbiesLikedMe.do"><spring:message code="master.page.chorbi.list.likers" /></a></li>
 		</security:authorize>
@@ -67,6 +70,10 @@
 					<li class="arrow"></li>
 					<li><acme:link href="event/manager/list.do" code="master.page.manager.event.list"/></li>
 					<li><acme:link href="event/manager/create.do" code="master.page.manager.event.create"/></li>
+					<li><acme:link href="creditCard/display.do" code="master.page.chorbi.editCreditCard" /></li>
+					<li><acme:link href="chirp/listSent.do" code="master.page.chorbi.chirp.listSent" /></li>
+					<li><acme:link href="chirp/listReceived.do" code="master.page.chorbi.chirp.listReceived" /></li>
+					<li><acme:link href="charge/user/list.do" code="master.page.user.charge.list" /></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -74,10 +81,14 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="chorbi/register.do"><spring:message code="master.page.chorbi.register" /></a></li>
+			<li><a class="fNiv" href="event/list.do"><spring:message code="master.page.event.list.all" /></a></li>
+			<li><a class="fNiv" href="event/listAvSts.do"><spring:message code="master.page.event.list.recent" /></a></li>
 		</security:authorize>
 		
-		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN')">
+		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN', 'MANAGER')">
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message code="master.page.chorbi.list" /></a></li>
+			<li><a class="fNiv" href="event/list.do"><spring:message code="master.page.event.list.all" /></a></li>
+			<li><a class="fNiv" href="event/listAvSts.do"><spring:message code="master.page.event.list.recent" /></a></li>
 			<li><a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)

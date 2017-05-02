@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CreditCardService;
-import controllers.AbstractController;
 import domain.CreditCard;
 
 @Controller
-@RequestMapping("/creditCard/chorbi")
-public class CreditCardChorbiController extends AbstractController {
+@RequestMapping("/creditCard")
+public class CreditCardController extends AbstractController {
 
 	// Services ----------------------------------------------
 
@@ -24,13 +23,13 @@ public class CreditCardChorbiController extends AbstractController {
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam(required = false) final boolean showWarningLikers) {
+	public ModelAndView display(@RequestParam(required = false) final boolean showWarning) {
 		ModelAndView res;
 		CreditCard creditCard;
 		String maskedNumber;
 
 		try {
-			creditCard = this.creditCardService.findChorbiCreditCard();
+			creditCard = this.creditCardService.findUserCreditCard();
 			maskedNumber = this.creditCardService.getMaskedNumber(creditCard);
 		} catch (final IllegalArgumentException e) {
 			creditCard = null;
@@ -40,7 +39,7 @@ public class CreditCardChorbiController extends AbstractController {
 		res = new ModelAndView("creditCard/display");
 		res.addObject("creditCard", creditCard);
 		res.addObject("maskedNumber", maskedNumber);
-		res.addObject("showWarningLikers", showWarningLikers);
+		res.addObject("showWarningLikers", showWarning);
 
 		return res;
 	}

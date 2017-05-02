@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiLikeService;
+import services.ChorbiService;
+import services.CreditCardService;
 import services.SearchTemplateService;
 import controllers.AbstractController;
 import domain.Chorbi;
@@ -32,6 +35,15 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@Autowired
 	private SearchTemplateService	searchTemplateService;
+
+	@Autowired
+	private CreditCardService		creditCardService;
+
+	@Autowired
+	private ChorbiService			chorbiService;
+
+	@Autowired
+	private ChorbiLikeService		chorbiLikeService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -63,16 +75,31 @@ public class SearchTemplateChorbiController extends AbstractController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search() {
-		ModelAndView view = new ModelAndView("chorbi/list");
+		ModelAndView res;
+		Chorbi principal;
 
-		SearchTemplate searchTemplateCurrentUser = this.searchTemplateService.findSearchTemplateByPrincipal();
+		principal = this.chorbiService.findByPrincipal();
 
-		Collection<Chorbi> chorbiesMatched = this.searchTemplateService.search(searchTemplateCurrentUser);
+		if (principal.getCreditCard() == null)
+			res = new ModelAndView("redirect:/creditCard/display.do?showWarning=true");
+		else if (!this.creditCardService.isCreditCardDateValid(principal.getCreditCard()))
+			res = new ModelAndView("redirect:/creditCard/display.do?showWarning=true");
+		else {
+			res = new ModelAndView("chorbi/list");
+			final SearchTemplate searchTemplateCurrentUser = this.searchTemplateService.findSearchTemplateByPrincipal();
 
-		view.addObject("chorbies", chorbiesMatched);
-		view.addObject("requestURI", "searchTemplate/chorbi/search.do");
+			Collection<Chorbi> liked;
 
-		return view;
+			liked = this.chorbiLikeService.findLiked(this.chorbiService.findByPrincipal());
+
+			final Collection<Chorbi> chorbiesMatched = this.searchTemplateService.search(searchTemplateCurrentUser);
+
+			res.addObject("chorbies", chorbiesMatched);
+			res.addObject("liked", liked);
+			res.addObject("requestURI", "searchTemplate/chorbi/search.do");
+		}
+
+		return res;
 	}
 
 	protected ModelAndView createEditModelAndView(final SearchTemplate searchTemplate) {

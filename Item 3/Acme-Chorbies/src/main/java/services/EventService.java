@@ -2,7 +2,7 @@
 package services;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.EventRepository;
-import domain.Chirp;
+import domain.Broadcast;
+import domain.Charge;
 import domain.Chorbi;
 import domain.Event;
 import domain.Manager;
@@ -24,23 +25,32 @@ public class EventService {
 	// Managed repository ---------------------------
 
 	@Autowired
-	private EventRepository	eventRepository;
+	private EventRepository		eventRepository;
 
 	// Supporting services --------------------------
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private ChirpService	chirpService;
+	private ManagerService		managerService;
 
 	@Autowired
-	private ManagerService	managerService;
+	private BroadcastService	broadcastService;
+
+	@Autowired
+	private ChorbiService		chorbiService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
+
+	@Autowired
+	private ChargeService		chargeService;
 
 	// Validator -----------------------------------
 
 	@Autowired
-	private Validator		validator;
+	private Validator			validator;
 
 
 	// Constructor ---------------------------------
@@ -55,9 +65,16 @@ public class EventService {
 		Assert.isTrue(this.actorService.checkAuthority("MANAGER"));
 
 		Event res;
+		Manager manager;
+
+		manager = this.managerService.findByPrincipal();
+
+		Assert.notNull(manager.getCreditCard(), "You must register a credit card");
+		Assert.isTrue(this.creditCardService.isCreditCardDateValid(manager.getCreditCard()));
 
 		res = new Event();
 		res.setAvailableSeats(0);
+		res.setManager(manager);
 
 		return res;
 	}
@@ -68,24 +85,24 @@ public class EventService {
 	 */
 
 	public Event save(final Event event) {
-		Event res;
-		Chirp chirp;
+		Assert.notNull(event);
 
-		if (event.getId() != 0) {
-			chirp = this.getModificationsChirp(event);
-			this.sendNotificationChirp(chirp, event);
-		} else {
+		Event res;
+
+		if (event.getId() == 0) {
+			Charge charge;
 			Manager principal;
+
 			principal = this.managerService.findByPrincipal();
-			event.setAvailableSeats(event.getSeats());
-			event.setManager(principal);
+			charge = this.chargeService.create(principal);
+
+			this.chargeService.save(charge);
 		}
 
 		res = this.eventRepository.save(event);
 
 		return res;
 	}
-
 	/*
 	 * When an event is cancelled/deleted chorbies registered to the event
 	 * will receive a chirp.
@@ -93,15 +110,26 @@ public class EventService {
 
 	public void delete(final Event event) {
 		Assert.isTrue(this.actorService.checkAuthority("MANAGER"));
+		Assert.notNull(event);
 
-		Chirp chirp;
+		Broadcast broadcast;
+		Event original;
+		Collection<Chorbi> attendees;
 
 		this.checkManager(event);
 
-		this.eventRepository.delete(event);
+		original = this.findOne(event.getId());
+		broadcast = this.getDeletionBroadcast(original);
+		this.broadcastService.update(broadcast);
 
-		chirp = this.getDeletionChirp(event);
-		this.sendNotificationChirp(chirp, event);
+		attendees = this.findChorbiesByEvent(original.getId());
+
+		for (final Chorbi c : attendees) {
+			c.getEvents().remove(original);
+			this.chorbiService.save(c);
+		}
+
+		this.eventRepository.delete(original);
 	}
 
 	public Collection<Event> findAll() {
@@ -131,26 +159,40 @@ public class EventService {
 
 	public Event reconstruct(final Event event, final BindingResult bindingResult) {
 		Assert.isTrue(this.actorService.checkAuthority("MANAGER"));
+		Assert.notNull(event);
 
-		Event res, original;
 		Manager manager;
-		int availableSeats, attendees;
+		Event res;
+		Date currentDate;
 
-		original = this.findOne(event.getId());
-
-		this.checkManager(event);
-
+		currentDate = new Date(System.currentTimeMillis());
 		manager = this.managerService.findByPrincipal();
-		attendees = original.getSeats() - original.getAvailableSeats();
-
-		if (event.getSeats() < attendees) // New number of seats must be greater or equal to the number of attendees
-			bindingResult.rejectValue("seats", "event.error.seats");
-
 		res = event;
-		availableSeats = event.getSeats() - attendees;
+
+		if (event.getId() == 0)
+			res.setAvailableSeats(event.getSeats());
+		else {
+			Event original;
+			int availableSeats, attendees;
+
+			original = this.findOne(event.getId());
+
+			this.checkManager(event);
+
+			attendees = original.getSeats() - original.getAvailableSeats();
+
+			if (event.getSeats() < attendees) // New number of seats must be greater or equal to the number of attendees
+				bindingResult.rejectValue("seats", "event.error.seats");
+
+			availableSeats = event.getSeats() - attendees;
+			res.setAvailableSeats(availableSeats);
+		}
+
+		if (res.getMoment() != null)
+			if (res.getMoment().before(currentDate))
+				bindingResult.rejectValue("moment", "javax.validation.constraints.Future.message");
 
 		res.setManager(manager);
-		res.setAvailableSeats(availableSeats);
 
 		this.validator.validate(res, bindingResult);
 
@@ -162,8 +204,12 @@ public class EventService {
 		Assert.isTrue(eventId != 0);
 
 		Event res;
+		Date currentDate;
 
 		res = this.findOne(eventId);
+		currentDate = new Date(System.currentTimeMillis());
+
+		Assert.isTrue(res.getMoment().after(currentDate), "Past events cannot be modified");
 
 		this.checkManager(res);
 
@@ -179,6 +225,8 @@ public class EventService {
 	 */
 
 	private void checkManager(final Event event) {
+		Assert.notNull(event);
+
 		Event retrieved;
 		Manager principal;
 
@@ -189,7 +237,7 @@ public class EventService {
 	}
 
 	/**
-	 * Create a notification chirp listing the changes made to an event
+	 * Creates a broadcast listing the changes made to an event
 	 * for chorbies who have registered to that event.
 	 * 
 	 * @param event
@@ -197,15 +245,17 @@ public class EventService {
 	 * @return The notification chirp to be sended.
 	 */
 
-	private Chirp getModificationsChirp(final Event event) {
+	public Broadcast getModificationsBroadcast(final Event event) {
+		Assert.notNull(event);
+
 		String subject, text;
 		Event original;
-		Chirp res;
-		Manager manager;
+		Broadcast res;
+		Collection<Chorbi> uninformedChorbies;
 
-		res = this.chirpService.create();
+		res = this.broadcastService.create();
 		original = this.eventRepository.findOne(event.getId());
-		manager = this.managerService.findByPrincipal();
+		uninformedChorbies = this.findChorbiesByEvent(event.getId());
 
 		subject = "The event / El evento: " + event.getTitle() + " has been modified / ha sido modificado";
 		text = "This has been changed / Esto ha cambiado:\n";
@@ -221,60 +271,82 @@ public class EventService {
 
 		res.setSubject(subject);
 		res.setText(text);
-		res.setSender(manager);
-		res.setAttachments(new HashSet<String>());
+		res.setManager(event.getManager());
+		res.setUninformedChorbies(uninformedChorbies);
 
 		return res;
 	}
 
 	/**
-	 * Create a notification chirp informing chorbies who have registered to the event
-	 * that it's going to be cancelled.
+	 * Creates a broadcast informing chorbies who have registered to the event
+	 * that it's been cancelled.
 	 * 
 	 * @param event
 	 *            The cancelled event.
 	 * @return The notification chirp.
 	 */
 
-	private Chirp getDeletionChirp(final Event event) {
-		String subject, text;
-		Chirp res;
-		Manager manager;
+	public Broadcast getDeletionBroadcast(final Event event) {
+		Assert.notNull(event);
 
-		res = this.chirpService.create();
-		manager = this.managerService.findByPrincipal();
+		String subject, text;
+		Broadcast res;
+		Collection<Chorbi> uninformedChorbies;
+		Event original;
+
+		res = this.broadcastService.create();
+		original = this.findOne(event.getId());
 
 		subject = "The event / El evento: " + event.getTitle() + "has been cancelled / ha sido cancelado";
 		text = "Sorry for any inconvenience / Disculpe las molestias";
+		uninformedChorbies = this.findChorbiesByEvent(event.getId());
 
 		res.setSubject(subject);
 		res.setText(text);
-		res.setSender(manager);
-		res.setAttachments(new HashSet<String>());
+		res.setManager(original.getManager());
+		res.setUninformedChorbies(uninformedChorbies);
 
 		return res;
 	}
 
-	/**
-	 * Send a notification chirp to chorbies registered to an event.
-	 * 
-	 * @param chirp
-	 *            The notification chirp
-	 * @param event
-	 *            The event that is going to be modified or deleted.
-	 */
+	public void registerChorbi(final Event event) {
+		Assert.notNull(event);
+		Assert.isTrue(this.actorService.checkAuthority("CHORBI"));
 
-	private void sendNotificationChirp(final Chirp chirp, final Event event) {
-		Collection<Chorbi> chorbies;
-		Chirp saved;
+		Chorbi chorbi;
+		Date currentDate;
 
-		chorbies = this.findChorbiesByEvent(event.getId());
+		chorbi = this.chorbiService.findByPrincipal();
+		currentDate = new Date(System.currentTimeMillis());
 
-		for (final Chorbi c : chorbies) {
-			chirp.setRecipient(c);
-			saved = this.chirpService.send(chirp);
-			this.chirpService.saveCopy(saved);
-		}
+		Assert.isTrue(!chorbi.getEvents().contains(event), "You are already registered to this event");
+		Assert.isTrue(event.getMoment().after(currentDate), "You can't register to past events");
+
+		chorbi.getEvents().add(event);
+		event.setAvailableSeats(event.getAvailableSeats() - 1);
+
+		this.chorbiService.save(chorbi);
+		this.save(event);
+	}
+
+	public void unregisterChorbi(final Event event) {
+		Assert.notNull(event);
+		Assert.isTrue(this.actorService.checkAuthority("CHORBI"));
+
+		Chorbi chorbi;
+		Date currentDate;
+
+		chorbi = this.chorbiService.findByPrincipal();
+		currentDate = new Date(System.currentTimeMillis());
+
+		Assert.isTrue(chorbi.getEvents().contains(event), "You were not registered to this event");
+		Assert.isTrue(event.getMoment().after(currentDate), "You can't unregister from past events");
+
+		chorbi.getEvents().remove(event);
+		event.setAvailableSeats(event.getAvailableSeats() + 1);
+
+		this.chorbiService.save(chorbi);
+		this.save(event);
 	}
 
 	public Collection<Chorbi> findChorbiesByEvent(final int eventId) {
@@ -291,6 +363,16 @@ public class EventService {
 
 		res = this.eventRepository.findEventsLessOneMonthSeatsAvailables();
 		Assert.notNull(res);
+
+		return res;
+	}
+
+	public Collection<Event> findManagerEvents(final int managerId) {
+		Assert.isTrue(managerId != 0);
+
+		Collection<Event> res;
+
+		res = this.eventRepository.findManagerEvents(managerId);
 
 		return res;
 	}

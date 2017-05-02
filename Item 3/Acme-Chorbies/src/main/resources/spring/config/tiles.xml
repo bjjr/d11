@@ -32,6 +32,7 @@
 		<value>/views/chirp/tiles.xml</value>
 		<value>/views/fee/tiles.xml</value>
 		<value>/views/legal/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
 		<value>/views/userAccount/tiles.xml</value>
 		<value>/views/searchTemplate/tiles.xml</value>
 		<value>/views/cache/tiles.xml</value>

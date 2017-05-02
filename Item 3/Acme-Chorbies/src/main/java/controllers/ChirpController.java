@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers;
 
 import java.util.Collection;
 
@@ -11,34 +11,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.BroadcastService;
 import services.ChirpService;
 import services.ChorbiService;
-import controllers.AbstractController;
 import domain.Chirp;
 import domain.Chorbi;
 
 @Controller
-@RequestMapping("/chirp/chorbi")
-public class ChirpChorbiController extends AbstractController {
+@RequestMapping("/chirp")
+public class ChirpController extends AbstractController {
 
 	// Services -----------------------------------------------
 
 	@Autowired
-	private ChirpService	chirpService;
+	private ChirpService		chirpService;
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
-	private boolean			isReply;
+	@Autowired
+	private BroadcastService	broadcastService;
 
-	private boolean			isResend;
+	@Autowired
+	private ActorService		actorService;
 
-	private int				recipientId;
+	private boolean				isReply;
+
+	private boolean				isResend;
+
+	private int					recipientId;
 
 
 	// Constructors -------------------------------------------
 
-	public ChirpChorbiController() {
+	public ChirpController() {
 		super();
 	}
 
@@ -122,7 +129,7 @@ public class ChirpChorbiController extends AbstractController {
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
 		result.addObject("isSent", isSent);
-		result.addObject("requestURI", "chirp/chorbi/listSent.do");
+		result.addObject("requestURI", "chirp/listSent.do");
 
 		return result;
 	}
@@ -133,13 +140,18 @@ public class ChirpChorbiController extends AbstractController {
 		Collection<Chirp> chirps;
 		Boolean isSent;
 
+		// Check for new broadcasts
+
+		if (this.actorService.checkAuthority("CHORBI"))
+			this.broadcastService.findNewBroadcasts(this.chorbiService.findByPrincipal());
+
 		chirps = this.chirpService.findChirpsReceived();
 		isSent = false;
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
 		result.addObject("isSent", isSent);
-		result.addObject("requestURI", "chirp/chorbi/listReceived.do");
+		result.addObject("requestURI", "chirp/listReceived.do");
 
 		return result;
 	}
@@ -161,7 +173,7 @@ public class ChirpChorbiController extends AbstractController {
 			try {
 				saved = this.chirpService.send(reconstructed);
 				this.chirpService.saveCopy(saved);
-				result = new ModelAndView("redirect:/chirp/chorbi/listSent.do");
+				result = new ModelAndView("redirect:/chirp/listSent.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(chirp, "misc.commit.error");
 			}
@@ -184,7 +196,7 @@ public class ChirpChorbiController extends AbstractController {
 			try {
 				saved = this.chirpService.send(reconstructed);
 				this.chirpService.saveCopy(saved);
-				result = new ModelAndView("redirect:/chirp/chorbi/listSent.do");
+				result = new ModelAndView("redirect:/chirp/listSent.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(chirp, "misc.commit.error");
 			}
@@ -207,7 +219,7 @@ public class ChirpChorbiController extends AbstractController {
 			try {
 				saved = this.chirpService.send(reconstructed);
 				this.chirpService.saveCopy(saved);
-				result = new ModelAndView("redirect:/chirp/chorbi/listSent.do");
+				result = new ModelAndView("redirect:/chirp/listSent.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(chirp, "misc.commit.error");
 			}
@@ -231,9 +243,9 @@ public class ChirpChorbiController extends AbstractController {
 		try {
 			this.chirpService.delete(chirp);
 			if (isChirpSent)
-				result = new ModelAndView("redirect:/chirp/chorbi/listSent.do");
+				result = new ModelAndView("redirect:/chirp/listSent.do");
 			else
-				result = new ModelAndView("redirect:/chirp/chorbi/listReceived.do");
+				result = new ModelAndView("redirect:/chirp/listReceived.do");
 
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(chirp, "misc.commit.error");
