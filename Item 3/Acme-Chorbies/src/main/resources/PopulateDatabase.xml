@@ -917,17 +917,17 @@
 	
 	<bean id="banner1" class="domain.Banner">
 		<property name="service" value="Acme-Pad-Thai" />
-		<property name="path" value="https://i1.wp.com/www.cocinothai.com/wp-content/uploads/2013/06/Pad-thaiFeat.jpg?resize=940%2C590" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d07/master/Acme-Pad-Thai/src/main/webapp/images/acmepadthai.png" />
 	</bean>
 	
 	<bean id="banner2" class="domain.Banner">
 		<property name="service" value="Acme BnB" />
-		<property name="path" value="http://www.ikea.com/PIAimages/0416866_PE577783_S5.JPG" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d08/deploy/Item%204/AcmeBnB/src/main/webapp/images/logo.png" />
 	</bean>
 	
 	<bean id="banner3" class="domain.Banner">
 		<property name="service" value="Acme CnG" />
-		<property name="path" value="http://www.km77.com/marcas/ford/fiesta_05/tdci90/med/04.jpg" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d09/master/Item%203/Acme-CnG/src/main/webapp/images/logo.png" />
 	</bean>
 	
 	<!-- EVENT -->
