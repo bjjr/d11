@@ -38,6 +38,7 @@
 		<value>/views/legal/messages</value>
 		<value>/views/manager/messages</value>
 		<value>/views/searchTemplate/messages</value>
+		<value>/views/broadcast/messages</value>
 		
 	</util:list>
 

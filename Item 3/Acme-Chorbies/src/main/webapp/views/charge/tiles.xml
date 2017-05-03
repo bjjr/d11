@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="charge/list" extends="master.page">	
+		<put-attribute name="title" value="Charges" />
+		<put-attribute name="body" value="/views/charge/list.jsp" />
+	</definition>
+	
+	<definition name="charge/generateCharges" extends="master.page">	
+		<put-attribute name="title" value="Generate charges to chorbies" />
+		<put-attribute name="body" value="/views/charge/generateCharges.jsp" />
+	</definition>
+	
+	<definition name="charge/economicStatistics" extends="master.page">	
+		<put-attribute name="title" value="Economic statistics" />
+		<put-attribute name="body" value="/views/charge/economicStatistics.jsp" />
+	</definition>
+	
+</tiles-definitions>

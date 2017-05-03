@@ -25,14 +25,19 @@
 		
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/banner/tiles.xml</value>
+		<value>/views/charge/tiles.xml</value>
 		<value>/views/chorbiLike/tiles.xml</value>
 		<value>/views/chorbi/tiles.xml</value>
 		<value>/views/creditCard/tiles.xml</value>
 		<value>/views/chirp/tiles.xml</value>
+		<value>/views/fee/tiles.xml</value>
 		<value>/views/legal/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
 		<value>/views/userAccount/tiles.xml</value>
 		<value>/views/searchTemplate/tiles.xml</value>
 		<value>/views/cache/tiles.xml</value>
+		<value>/views/event/tiles.xml</value>
+		<value>/views/broadcast/tiles.xml</value>
 	</util:list>
 
 </beans>
