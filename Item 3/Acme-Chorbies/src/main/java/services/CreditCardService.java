@@ -91,9 +91,14 @@ public class CreditCardService {
 
 		res = creditCard;
 
-		if (!this.isCreditCardDateValid(res))
-			bindingResult.rejectValue("month", "creditcard.error.dates");
-		else if (!this.isCreditCardBrandValid(creditCard))
+		/*
+		 * if (!this.isCreditCardDateValid(res))
+		 * bindingResult.rejectValue("month", "creditcard.error.dates");
+		 * else if (!this.isCreditCardBrandValid(creditCard))
+		 * bindingResult.rejectValue("brand", "creditcard.error.brand");
+		 */
+
+		if (!this.isCreditCardBrandValid(creditCard))
 			bindingResult.rejectValue("brand", "creditcard.error.brand");
 
 		this.validator.validate(res, bindingResult);
