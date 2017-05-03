@@ -137,7 +137,7 @@ public class ManagerService {
 		return res;
 	}
 	private void checkPasswords(final String passwd1, final String passwd2, final BindingResult binding) {
-		if (!passwd1.equals(passwd2) || (passwd1 == null || passwd2 == null))
-			binding.rejectValue("userAccount.password", "chorbi.password.invalid");
+		//if (!passwd1.equals(passwd2) || (passwd1 == null || passwd2 == null))
+		//	binding.rejectValue("userAccount.password", "chorbi.password.invalid");
 	}
 }
