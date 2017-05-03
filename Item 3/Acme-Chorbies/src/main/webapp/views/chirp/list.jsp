@@ -23,7 +23,7 @@
 	name="chirps" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
-	<acme:column code="chirp.moment" property="${row.moment}"/>
+	<acme:column code="chirp.moment" property="moment" isTimestamp="true"/>
 	
 	<acme:column code="chirp.subject" property="${row.subject}"/>
 	
