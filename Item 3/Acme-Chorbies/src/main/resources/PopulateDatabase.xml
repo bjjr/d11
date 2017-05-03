@@ -430,6 +430,7 @@
 		<property name="company" value="company2" />
 		<property name="vat" value="ATU99999999" />
 		<property name="userAccount" ref="userAccountM2" />
+		<property name="creditCard" ref="creditCard6" />		
 	</bean>
 	
 	<bean id="manager3" class="domain.Manager">
@@ -440,6 +441,7 @@
 		<property name="company" value="company3" />
 		<property name="vat" value="ATU92999999" />
 		<property name="userAccount" ref="userAccountM3" />
+		<property name="creditCard" ref="creditCard6" />
 	</bean>
 	
 	<bean id="manager4" class="domain.Manager">
@@ -460,7 +462,6 @@
 		<property name="company" value="company5" />
 		<property name="vat" value="ATU92949949" />
 		<property name="userAccount" ref="userAccountM5" />
-		<property name="creditCard" ref="creditCard6" />
 	</bean>
 	
 	<!-- COORDINATES -->
@@ -610,6 +611,15 @@
 		<property name="year" value="2030" />
 		<property name="month" value="05" />
 		<property name="cvv" value="894" />
+	</bean>
+	
+	<bean id="creditCard7" class="domain.CreditCard">
+		<property name="holder" value="holderName7"/>
+		<property name="brand" value="N26" />
+		<property name="number" value="4716931078234724" />
+		<property name="year" value="2222" />
+		<property name="month" value="05" />
+		<property name="cvv" value="365" />
 	</bean>
 	
 	<!-- CHORBI LIKES -->
@@ -907,17 +917,17 @@
 	
 	<bean id="banner1" class="domain.Banner">
 		<property name="service" value="Acme-Pad-Thai" />
-		<property name="path" value="https://i1.wp.com/www.cocinothai.com/wp-content/uploads/2013/06/Pad-thaiFeat.jpg?resize=940%2C590" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d07/master/Acme-Pad-Thai/src/main/webapp/images/acmepadthai.png" />
 	</bean>
 	
 	<bean id="banner2" class="domain.Banner">
 		<property name="service" value="Acme BnB" />
-		<property name="path" value="http://www.ikea.com/PIAimages/0416866_PE577783_S5.JPG" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d08/deploy/Item%204/AcmeBnB/src/main/webapp/images/logo.png" />
 	</bean>
 	
 	<bean id="banner3" class="domain.Banner">
 		<property name="service" value="Acme CnG" />
-		<property name="path" value="http://www.km77.com/marcas/ford/fiesta_05/tdci90/med/04.jpg" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d09/master/Item%203/Acme-CnG/src/main/webapp/images/logo.png" />
 	</bean>
 	
 	<!-- EVENT -->
@@ -929,7 +939,7 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="20" />
 		<property name="availableSeats" value="14" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager2" />
 	</bean>
 
 	<bean id="event2" class="domain.Event">
@@ -939,7 +949,7 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="30" />
 		<property name="availableSeats" value="29" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager3" />
 	</bean>
 	
 	<bean id="event3" class="domain.Event">
@@ -949,7 +959,7 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="40" />
 		<property name="availableSeats" value="40" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager3" />
 	</bean>
 	
 	<bean id="event4" class="domain.Event">
@@ -959,7 +969,7 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="20" />
 		<property name="availableSeats" value="20" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager3" />
 	</bean>
 	
 	<bean id="event5" class="domain.Event">
@@ -969,7 +979,7 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="10" />
 		<property name="availableSeats" value="10" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager3" />
 	</bean>
 	
 	<bean id="event6" class="domain.Event">
@@ -979,17 +989,47 @@
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="50" />
 		<property name="availableSeats" value="50" />
-		<property name="manager" ref="manager1" />
+		<property name="manager" ref="manager3" />
 	</bean>
 
 	<bean id="event7" class="domain.Event">
 		<property name="title" value="Event7" />
+		<property name="moment" value="06/30/2017 12:00" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="50" />
+		<property name="availableSeats" value="50" />
+		<property name="manager" ref="manager3" />
+	</bean>
+
+	<bean id="event8" class="domain.Event">
+		<property name="title" value="Event8" />
 		<property name="moment" value="07/11/2015 12:00" />
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="50" />
 		<property name="availableSeats" value="50" />
-		<property name="manager" ref="manager2" />
+		<property name="manager" ref="manager3" />
+	</bean>
+	
+	<bean id="event9" class="domain.Event">
+		<property name="title" value="Event9" />
+		<property name="moment" value="05/30/2017 12:00" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="50" />
+		<property name="availableSeats" value="50" />
+		<property name="manager" ref="manager3" />
+	</bean>
+
+	<bean id="event10" class="domain.Event">
+		<property name="title" value="Event10" />
+		<property name="moment" value="07/30/2017 12:00" />
+		<property name="description" value="description" />
+		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
+		<property name="seats" value="50" />
+		<property name="availableSeats" value="50" />
+		<property name="manager" ref="manager3" />
 	</bean>
 		
 	<!-- FEE -->
@@ -1046,6 +1086,54 @@
 		<property name="amount" value="7" />
 		<property name="paid" value="true" />
 		<property name="user" ref="chorbi2" />
+	</bean>
+
+	<bean id="charge8" class="domain.Charge">
+		<property name="amount" value="13" />
+		<property name="paid" value="true" />
+		<property name="user" ref="manager1" />
+	</bean>
+	
+	<bean id="charge9" class="domain.Charge">
+		<property name="amount" value="25" />
+		<property name="paid" value="true" />
+		<property name="user" ref="manager1" />
+	</bean>
+	
+	<bean id="charge10" class="domain.Charge">
+		<property name="amount" value="41" />
+		<property name="paid" value="false" />
+		<property name="user" ref="manager1" />
+	</bean>
+	
+	<bean id="charge11" class="domain.Charge">
+		<property name="amount" value="4" />
+		<property name="paid" value="false" />
+		<property name="user" ref="manager1" />
+	</bean>
+
+	<bean id="charge12" class="domain.Charge">
+		<property name="amount" value="12" />
+		<property name="paid" value="true" />
+		<property name="user" ref="manager2" />
+	</bean>
+
+	<bean id="charge13" class="domain.Charge">
+		<property name="amount" value="33" />
+		<property name="paid" value="false" />
+		<property name="user" ref="manager2" />
+	</bean>
+
+	<bean id="charge14" class="domain.Charge">
+		<property name="amount" value="16" />
+		<property name="paid" value="true" />
+		<property name="user" ref="manager3" />
+	</bean>
+	
+	<bean id="charge15" class="domain.Charge">
+		<property name="amount" value="25" />
+		<property name="paid" value="false" />
+		<property name="user" ref="manager4" />
 	</bean>
 
 </beans>
