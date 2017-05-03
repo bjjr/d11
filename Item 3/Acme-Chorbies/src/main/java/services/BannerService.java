@@ -82,7 +82,8 @@ public class BannerService {
 
 		banners = (List<Banner>) this.findAll();
 
-		result = banners.get(random.nextInt(banners.size()));
+		//result = banners.get(random.nextInt(banners.size()));
+		result = banners.get(random.nextInt(banners.size() - 1));
 
 		return result;
 	}
