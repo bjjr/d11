@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
@@ -26,6 +29,7 @@ public class SearchTemplate extends DomainEntity implements Serializable {
 	private String				relationship;
 
 
+	@Range(min = 0)
 	public Integer getAge() {
 		return this.age;
 	}
@@ -34,6 +38,7 @@ public class SearchTemplate extends DomainEntity implements Serializable {
 		this.age = age;
 	}
 
+	@SafeHtml
 	public String getGender() {
 		return this.gender;
 	}
@@ -50,6 +55,7 @@ public class SearchTemplate extends DomainEntity implements Serializable {
 		this.coordinatesTemplate = coordinatesTemplate;
 	}
 
+	@SafeHtml
 	public String getKeyword() {
 		return this.keyword;
 	}
@@ -58,6 +64,7 @@ public class SearchTemplate extends DomainEntity implements Serializable {
 		this.keyword = keyword;
 	}
 
+	@SafeHtml
 	public String getRelationship() {
 		return this.relationship;
 	}
