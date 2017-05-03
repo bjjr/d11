@@ -50,7 +50,7 @@ public class BroadcastManagerController extends AbstractController {
 			res = this.createEditModelAndView(broadcastReconstructed);
 		else
 			try {
-				this.broadcastService.save(broadcastReconstructed);
+				this.broadcastService.update(broadcastReconstructed);
 				res = new ModelAndView("redirect:/");
 			} catch (final Throwable th) {
 				res = this.createEditModelAndView(broadcast, "misc.commit.error");

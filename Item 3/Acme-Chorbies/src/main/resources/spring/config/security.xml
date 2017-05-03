@@ -82,7 +82,7 @@
 		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 
 		<security:intercept-url pattern="/manager/save.do" access="hasAnyRole('MANAGER', 'ADMIN')" />
 		
-		<security:intercept-url pattern="/broadcast/manager/create.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/broadcast/manager/**" access="hasRole('MANAGER')" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
