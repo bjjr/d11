@@ -8,11 +8,16 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BroadcastRepository;
+import security.Authority;
 import domain.Broadcast;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -31,6 +36,15 @@ public class BroadcastService {
 	@Autowired
 	private UserService			userService;
 
+	@Autowired
+	private ManagerService		managerService;
+
+	@Autowired
+	private EventService		eventService;
+
+	@Autowired
+	private Validator			validator;
+
 
 	// Constructor ----------------------------------
 
@@ -48,6 +62,31 @@ public class BroadcastService {
 		return res;
 	}
 
+	public Broadcast save(final Broadcast broadcast) {
+		final Authority managerAuthority = new Authority();
+		managerAuthority.setAuthority(Authority.MANAGER);
+
+		Assert.isTrue(this.userService.findByPrincipal().getUserAccount().getAuthorities().contains(managerAuthority), "BroadcastService.save: You need to be manager in order to save a broadcast");
+		Assert.isTrue(broadcast.getUninformedChorbies().containsAll(this.eventService.findChorbiesByManagerEvents(broadcast.getManager())), "BroadcastService.save: All the Chorbies must be contained in the chorbies that are going to events");
+
+		return this.broadcastRepository.save(broadcast);
+	}
+
+	public Broadcast reconstruct(final Broadcast broadcast, final BindingResult bindingResult) {
+		final Manager manager = this.managerService.findByPrincipal();
+		final Collection<Chorbi> allChorbiesInManagerEvents = this.eventService.findChorbiesByManagerEvents(manager);
+
+		final Broadcast broadcastRes = this.create();
+
+		broadcastRes.setSubject(broadcast.getSubject());
+		broadcastRes.setText(broadcast.getText());
+
+		broadcastRes.setManager(manager);
+		broadcastRes.setUninformedChorbies(allChorbiesInManagerEvents);
+
+		this.validator.validate(broadcastRes, bindingResult);
+		return broadcastRes;
+	}
 	/*
 	 * If all chorbies have been notified about a modification
 	 * in an event, then the broadcast is deleted.

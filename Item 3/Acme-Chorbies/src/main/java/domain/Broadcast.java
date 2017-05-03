@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Broadcast extends DomainEntity {
@@ -21,6 +24,9 @@ public class Broadcast extends DomainEntity {
 	private String	text;
 
 
+	@NotBlank
+	@NotNull
+	@SafeHtml
 	public String getSubject() {
 		return this.subject;
 	}
@@ -29,6 +35,9 @@ public class Broadcast extends DomainEntity {
 		this.subject = subject;
 	}
 
+	@NotBlank
+	@NotNull
+	@SafeHtml
 	public String getText() {
 		return this.text;
 	}
