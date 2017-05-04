@@ -26,6 +26,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><acme:link href="manager/register.do" code="master.page.manager.register"/></li>
 					<li><acme:link href="dashboard/administrator/dashboard.do" code="master.page.dashboard"/></li>
 					<li><acme:link href="banner/list.do" code="master.page.banner.list"/></li>
 					<li><acme:link href="cache/administrator/display.do" code="master.page.cache"/></li>
@@ -68,6 +69,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><acme:link href="manager/edit.do" code="master.page.chorbi.edit"/></li>
 					<li><acme:link href="event/manager/list.do" code="master.page.manager.event.list"/></li>
 					<li><acme:link href="event/manager/create.do" code="master.page.manager.event.create"/></li>
 					<li><acme:link href="broadcast/manager/create.do" code="master.page.manager.broadast.create"/></li>
