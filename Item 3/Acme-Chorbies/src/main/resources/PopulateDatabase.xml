@@ -282,6 +282,11 @@
 		<property name="events">
         	<list>
             	<ref bean="event1" />
+            	<ref bean="event2" />
+           		<ref bean="event3" />
+            	<ref bean="event4" />
+            	<ref bean="event8" />
+            	<ref bean="event9" />
 			</list>
         </property>
 	</bean>
