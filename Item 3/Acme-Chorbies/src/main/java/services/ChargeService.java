@@ -110,7 +110,14 @@ public class ChargeService {
 
 		Assert.notNull(charge);
 
+		Assert.isTrue(!charge.isPaid(), "Cannot pay a charge already paid");
+
 		final Charge result;
+		int userId;
+
+		userId = this.actorService.findByPrincipal().getId();
+		Assert.isTrue(charge.getUser().getId() == userId, "Cannot pay a charge of another chorbi or a manager");
+		Assert.isTrue(charge.getUser().getCreditCard() != null, "You should have a valid credit card");
 
 		charge.setPaid(true);
 		result = this.save(charge);
