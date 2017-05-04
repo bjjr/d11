@@ -42,7 +42,7 @@
 
 			<acme:column code="event.seats" property="${row.seats}" />
 
-			<acme:column code="event.availableSeats" property="${row.availableSeats}" />
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" sortable="true" />
 
 			<acme:column code="manager.company" property="${row.manager.company}" />
 
@@ -60,7 +60,7 @@
 
 			<acme:column code="event.seats" property="${row.seats}" style="background-color:yellow;" />
 
-			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:yellow;" />
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:yellow;" sortable="true" />
 
 			<acme:column code="manager.company" property="${row.manager.company}" style="background-color:yellow;" />
 
@@ -79,7 +79,7 @@
 
 			<acme:column code="event.seats" property="${row.seats}" style="background-color:grey;" />
 
-			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:grey;" />
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:grey;" sortable="true" />
 
 			<acme:column code="manager.company" property="${row.manager.name}" style="background-color:grey;" />
 
@@ -103,7 +103,7 @@
 		</jstl:if>
 	</security:authorize>
 	
-	<jstl:if test="${isManagerView}">
+	<jstl:if test="${isManagerView and row.moment > current}">
 		<display:column>
 			<acme:link href="event/manager/edit.do?eventId=${row.id}" code="event.edit"/>
 		</display:column>
