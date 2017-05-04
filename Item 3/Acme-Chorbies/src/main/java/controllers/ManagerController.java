@@ -13,7 +13,7 @@ import domain.Manager;
 import forms.ManagerForm;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/acmemanager")
 public class ManagerController extends AbstractController {
 
 	@Autowired
@@ -89,7 +89,7 @@ public class ManagerController extends AbstractController {
 
 		result = new ModelAndView("manager/edit");
 
-		result.addObject("action", "manager/save.do");
+		result.addObject("action", "acmemanager/save.do");
 		result.addObject("modelAttribute", "managerForm");
 		result.addObject("managerForm", managerForm);
 		result.addObject("message", message);

@@ -78,9 +78,9 @@
 		<security:intercept-url pattern="/event/chorbi/**" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/event/manager/**" access="hasRole('MANAGER')" />
 	
-		<security:intercept-url pattern="/manager/register.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 
-		<security:intercept-url pattern="/manager/save.do" access="hasAnyRole('MANAGER', 'ADMIN')" />
+		<security:intercept-url pattern="/acmemanager/register.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/acmemanager/edit.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/acmemanager/save.do" access="hasAnyRole('MANAGER', 'ADMIN')" />
 		
 		<security:intercept-url pattern="/broadcast/manager/**" access="hasRole('MANAGER')" /> 
 	
