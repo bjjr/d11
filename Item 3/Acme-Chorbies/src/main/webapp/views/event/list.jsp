@@ -36,18 +36,15 @@
 			<!-- Attributes -->
 			<acme:column code="event.title" property="${row.title}" />
 
-			<acme:column code="event.moment" property="${row.moment}" />
+			<acme:column code="event.moment" property="moment" isTimestamp="true" />
 
 			<acme:column code="event.description" property="${row.description}" />
 
-
-
 			<acme:column code="event.seats" property="${row.seats}" />
 
-			<acme:column code="event.availableSeats"
-				property="${row.availableSeats}" />
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" />
 
-			<acme:column code="actor.name" property="${row.manager.name}" />
+			<acme:column code="manager.company" property="${row.manager.company}" />
 
 		</jstl:when>
 
@@ -55,26 +52,17 @@
 			test="${currentYear eq momentYear and currentMonth eq momentMonth and currentDay le momentDay}">
 
 		<!-- Attributes -->
-			<acme:column code="event.title" property="${row.title}"
-				style="background-color:yellow;" />
+			<acme:column code="event.title" property="${row.title}" style="background-color:yellow;" />
 
-			<acme:column code="event.moment" property="${row.moment}"
-				style="background-color:yellow;" />
+			<acme:column code="event.moment" property="moment" style="background-color:yellow;" isTimestamp="true" />
 
-			<acme:column code="event.description" property="${row.description}"
-				style="background-color:yellow;" />
+			<acme:column code="event.description" property="${row.description}" style="background-color:yellow;" />
 
+			<acme:column code="event.seats" property="${row.seats}" style="background-color:yellow;" />
 
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:yellow;" />
 
-
-			<acme:column code="event.seats" property="${row.seats}"
-				style="background-color:yellow;" />
-
-			<acme:column code="event.availableSeats"
-				property="${row.availableSeats}" style="background-color:yellow;" />
-
-			<acme:column code="actor.name" property="${row.manager.name}"
-				style="background-color:yellow;" />
+			<acme:column code="manager.company" property="${row.manager.company}" style="background-color:yellow;" />
 
 		</jstl:when>
 
@@ -83,26 +71,17 @@
 			test="${currentYear gt momentYear or (currentYear eq momentYear and currentMonth gt momentMonth) or (currentYear eq momentYear and currentMonth eq momentMonth and currentDay gt momentDay)}">
 
 			<!-- Attributes -->
-			<acme:column code="event.title" property="${row.title}"
-				style="background-color:grey;" />
+			<acme:column code="event.title" property="${row.title}" style="background-color:grey;" />
+				
+			<acme:column code="event.moment" property="moment" style="background-color:grey;" isTimestamp="true" />
 
-			<acme:column code="event.moment" property="${row.moment}"
-				style="background-color:grey;" />
+			<acme:column code="event.description" property="${row.description}" style="background-color:grey;" />
 
-			<acme:column code="event.description" property="${row.description}"
-				style="background-color:grey;" />
+			<acme:column code="event.seats" property="${row.seats}" style="background-color:grey;" />
 
+			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:grey;" />
 
-
-
-			<acme:column code="event.seats" property="${row.seats}"
-				style="background-color:grey;" />
-
-			<acme:column code="event.availableSeats"
-				property="${row.availableSeats}" style="background-color:grey;" />
-
-			<acme:column code="actor.name" property="${row.manager.name}"
-				style="background-color:grey;" />
+			<acme:column code="manager.company" property="${row.manager.name}" style="background-color:grey;" />
 
 		</jstl:when>
 

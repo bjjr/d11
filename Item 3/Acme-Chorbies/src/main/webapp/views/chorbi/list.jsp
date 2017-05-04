@@ -57,7 +57,7 @@
 		</jstl:if>
 	</display:column>
 	
-	<acme:column code="chorbi.birthdate" property="${row.birthdate}"/>
+	<acme:column code="chorbi.birthdate" property="birthdate" isDate="true"/>
 
 	<acme:column code="coordinates.country" property="${row.coordinates.country}"/>
 	

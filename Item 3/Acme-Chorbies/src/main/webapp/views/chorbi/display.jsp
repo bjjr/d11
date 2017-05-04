@@ -19,7 +19,7 @@
 
 <acme:display code="chorbi.description" property="${maskedDesc}" />
 
-<acme:display code="chorbi.birthdate" property="${chorbi.birthdate}" /><h4>(<jstl:out value="${age}" />)</h4>
+<acme:display code="chorbi.birthdate" date="${chorbi.birthdate}" isDate="true" /><h4>(<jstl:out value="${age}" />)</h4>
 
 <jstl:if test="${chorbi.gender eq 'MAN'}">
 	<spring:message code="chorbi.man" var="gender" />
