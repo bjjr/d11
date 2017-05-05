@@ -50,15 +50,15 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 	public void createChorbiLikeDriver() {
 		final Object testingData[][] = {
 			{    // A chorbi cannot like him/herself
-				"chorbi1", 1013, IllegalArgumentException.class
+				"chorbi1", 1855, IllegalArgumentException.class
 			}, { // A non registered user cannot like another chorbi
-				null, 1013, IllegalArgumentException.class
+				null, 1855, IllegalArgumentException.class
 			}, { // An administrator cannot like another chorbi
-				"admin", 1016, IllegalArgumentException.class
+				"admin", 1858, IllegalArgumentException.class
 			}, { // A chorbi cannot like another chorbi who have been already liked by him/her
-				"chorbi2", 1016, IllegalArgumentException.class
+				"chorbi2", 1858, IllegalArgumentException.class
 			}, { // Successful test
-				"chorbi1", 1015, null
+				"chorbi1", 1857, null
 			}
 		};
 
@@ -79,13 +79,13 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 	public void cancelChorbiLikeDriver() {
 		final Object testingData[][] = {
 			{ // A non registered user cannot cancel some like
-				null, 1013, IllegalArgumentException.class
+				null, 1855, IllegalArgumentException.class
 			}, { // An administrator cannot cancel some like
-				"admin", 1016, IllegalArgumentException.class
+				"admin", 1858, IllegalArgumentException.class
 			}, { // A chorbi cannot cancel some like that not belongs to him/her
-				"chorbi2", 1017, IllegalArgumentException.class
+				"chorbi2", 1859, IllegalArgumentException.class
 			}, { // Successful test
-				"chorbi2", 1016, null
+				"chorbi2", 1858, null
 			}
 
 		};

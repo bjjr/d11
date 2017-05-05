@@ -93,6 +93,10 @@ public class BroadcastService {
 		return res;
 	}
 
+	public void flush() {
+		this.broadcastRepository.flush();
+	}
+
 	// Other business methods -----------------------
 
 	/**

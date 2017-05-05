@@ -89,7 +89,7 @@
 
 	<security:authorize access="hasRole('CHORBI')">
 		<jstl:if test="${chorbiEvents != null}">
-			<jstl:if test="${row.moment > current && !chorbiEvents.contains(row)}">
+			<jstl:if test="${row.moment > current && !chorbiEvents.contains(row) && row.availableSeats > 0}">
 				<display:column>
 					<acme:link href="event/chorbi/register.do?eventId=${row.id}" code="event.register"/>
 				</display:column>

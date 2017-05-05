@@ -942,8 +942,8 @@
 		<property name="moment" value="07/11/2020 17:33" />
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
-		<property name="seats" value="20" />
-		<property name="availableSeats" value="14" />
+		<property name="seats" value="6" />
+		<property name="availableSeats" value="0" />
 		<property name="manager" ref="manager2" />
 	</bean>
 
@@ -953,7 +953,7 @@
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="30" />
-		<property name="availableSeats" value="29" />
+		<property name="availableSeats" value="28" />
 		<property name="manager" ref="manager3" />
 	</bean>
 	
@@ -963,7 +963,7 @@
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="40" />
-		<property name="availableSeats" value="40" />
+		<property name="availableSeats" value="39" />
 		<property name="manager" ref="manager3" />
 	</bean>
 	
@@ -973,7 +973,7 @@
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="20" />
-		<property name="availableSeats" value="20" />
+		<property name="availableSeats" value="19" />
 		<property name="manager" ref="manager3" />
 	</bean>
 	
@@ -1013,7 +1013,7 @@
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="50" />
-		<property name="availableSeats" value="50" />
+		<property name="availableSeats" value="49" />
 		<property name="manager" ref="manager3" />
 	</bean>
 	
@@ -1023,7 +1023,7 @@
 		<property name="description" value="description" />
 		<property name="picture" value="https://farm3.staticflickr.com/2829/33931879416_6d54b3887c_q_d.jpg" />
 		<property name="seats" value="50" />
-		<property name="availableSeats" value="50" />
+		<property name="availableSeats" value="49" />
 		<property name="manager" ref="manager3" />
 	</bean>
 

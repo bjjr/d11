@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.BroadcastService;
 import services.CreditCardService;
 import services.EventService;
 import services.ManagerService;
 import controllers.AbstractController;
-import domain.Broadcast;
 import domain.Event;
 import domain.Manager;
 
@@ -32,9 +30,6 @@ public class EventManagerController extends AbstractController {
 
 	@Autowired
 	private ManagerService		managerService;
-
-	@Autowired
-	private BroadcastService	broadcastService;
 
 	@Autowired
 	private CreditCardService	creditCardService;
@@ -138,10 +133,7 @@ public class EventManagerController extends AbstractController {
 			res = this.createEditModelAndView(reconstructed, true);
 		else
 			try {
-				Broadcast broadcast;
-				broadcast = this.eventService.getModificationsBroadcast(reconstructed);
 				this.eventService.save(reconstructed);
-				this.broadcastService.update(broadcast);
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable th) {
 				res = this.createEditModelAndView(event, "misc.commit.error", true);
