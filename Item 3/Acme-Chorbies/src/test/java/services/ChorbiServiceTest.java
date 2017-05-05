@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -187,6 +188,21 @@ public class ChorbiServiceTest extends AbstractTest {
 				success = true;
 
 		Assert.isTrue(success);
+
+		this.unauthenticate();
+	}
+
+	@Test
+	public void testFindChorbiesSortNumStars() {
+		this.authenticate("admin");
+
+		List<Chorbi> res;
+
+		res = new LinkedList<>(this.chorbiService.findChorbiesSortNumStars());
+
+		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
 
 		this.unauthenticate();
 	}

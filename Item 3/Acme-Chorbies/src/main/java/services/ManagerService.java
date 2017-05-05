@@ -99,6 +99,15 @@ public class ManagerService {
 
 		return res;
 	}
+
+	public Manager findOne(final int managerId) {
+		Manager res;
+
+		res = this.managerRepository.findOne(managerId);
+
+		return res;
+	}
+
 	//Other business methods -----------------------
 
 	public Manager findByPrincipal() {

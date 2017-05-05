@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -299,6 +300,21 @@ public class ChirpServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.listChorbiesAndSendChirpTemplate((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 
+	}
+
+	@Test
+	public void testFindChorbiesSortedByNumberEvents() {
+		this.authenticate("admin");
+
+		List<Chorbi> res;
+
+		res = new LinkedList<>(this.chorbiService.findChorbiesSortedByNumberEvents());
+
+		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1857)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1855)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1856)));
+
+		this.unauthenticate();
 	}
 
 	// Templates --------------------------------------------------------------
