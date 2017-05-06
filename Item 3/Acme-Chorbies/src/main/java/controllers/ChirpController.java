@@ -99,18 +99,12 @@ public class ChirpController extends AbstractController {
 	public ModelAndView resend(@RequestParam final int chirpId) {
 		ModelAndView result;
 		Chirp chirp;
-		Collection<Chorbi> chorbies;
-		Chorbi principal;
 
 		this.isReply = false;
 		this.isResend = true;
 
-		chorbies = this.chorbiService.findAll();
-		principal = this.chorbiService.findByPrincipal();
-		chorbies.remove(principal);
 		chirp = this.chirpService.resend(chirpId);
 		result = this.createEditModelAndView(chirp);
-		result.addObject("chorbies", chorbies);
 
 		return result;
 	}
@@ -272,6 +266,16 @@ public class ChirpController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isReply", this.isReply);
 		result.addObject("isResend", this.isResend);
+
+		if (this.isResend) {
+			Collection<Chorbi> chorbies;
+			Chorbi principal;
+
+			chorbies = this.chorbiService.findAll();
+			principal = this.chorbiService.findByPrincipal();
+			chorbies.remove(principal);
+			result.addObject("chorbies", chorbies);
+		}
 
 		return result;
 	}

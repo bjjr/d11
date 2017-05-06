@@ -7,6 +7,7 @@ import java.util.Collection;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +50,7 @@ public class SearchTemplateService {
 		return searchTemplateResult;
 	}
 
+	@CacheEvict(value = "chorbiesPerSearchTemplate", key = "#searchTemplate.id")
 	public SearchTemplate save(final SearchTemplate searchTemplate) {
 
 		Assert.notNull(searchTemplate, "SearchTemplateService.save: The search template cannot be null");

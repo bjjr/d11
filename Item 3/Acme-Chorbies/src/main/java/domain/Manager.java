@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,6 +21,7 @@ public class Manager extends User {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml
 	public String getCompany() {
 		return this.company;
 	}
@@ -30,6 +32,7 @@ public class Manager extends User {
 
 	@NotNull
 	@NotBlank
+	@SafeHtml
 	public String getVat() {
 		return this.vat;
 	}

@@ -61,19 +61,17 @@ public class BroadcastService {
 	}
 
 	public Broadcast reconstruct(final Broadcast broadcast, final BindingResult bindingResult) {
+		Broadcast res;
 		final Manager manager = this.managerService.findByPrincipal();
 		final Collection<Chorbi> allChorbiesInManagerEvents = this.eventService.findChorbiesByManagerEvents(manager);
 
-		final Broadcast broadcastRes = this.create();
+		res = broadcast;
 
-		broadcastRes.setSubject(broadcast.getSubject());
-		broadcastRes.setText(broadcast.getText());
+		res.setManager(manager);
+		res.setUninformedChorbies(allChorbiesInManagerEvents);
 
-		broadcastRes.setManager(manager);
-		broadcastRes.setUninformedChorbies(allChorbiesInManagerEvents);
-
-		this.validator.validate(broadcastRes, bindingResult);
-		return broadcastRes;
+		this.validator.validate(res, bindingResult);
+		return res;
 	}
 	/*
 	 * If all chorbies have been notified about a modification
