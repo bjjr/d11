@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Actor;
 import domain.Chorbi;
 import domain.ChorbiLike;
 
@@ -32,6 +33,9 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 
 	@Autowired
 	private ChorbiService		chorbiService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -92,6 +96,30 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.cancelChorbiLikeTemplate((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	/*
+	 * Test case: A chorbi decides to browse the chorbies who liked him.
+	 * Functional Requirement: An actor who is authenticated as an chorbi must be able to Browse the catalogue of chorbies who have liked him or her as long as he or she has registered a valid credit card. If he or she’s not register a valid card, then the
+	 * system must ask him or her to do so; the system must inform the chorbies that their credit cards will not be charged.
+	 */
+
+	@Test
+	public void browseLikerChorbiesDriver() {
+		final Object testingData[][] = {
+			{
+				"chorbi5", null
+			}, {
+				"chorbi1", IllegalArgumentException.class
+			}, {
+				"admin", IllegalArgumentException.class
+			}, {
+				null, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.browseLikerChorbiesTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
 	}
 
 	@Test
@@ -234,4 +262,22 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
+	protected void browseLikerChorbiesTemplate(final String username, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			this.authenticate(username);
+			final Actor actor = this.actorService.findByPrincipal();
+
+			final Collection<Chorbi> chorbiesLikers = this.chorbiLikeService.findChorbisByLiked(actor.getId());
+
+			this.unauthenticate();
+		} catch (final Throwable th) {
+			caught = th.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ChorbiLikeRepository;
+import security.Authority;
 import domain.Chorbi;
 import domain.ChorbiLike;
 
@@ -165,6 +166,10 @@ public class ChorbiLikeService {
 	}
 
 	public Collection<Chorbi> findChorbisByLiked(final int chorbiId) {
+		Assert.isTrue(this.actorService.checkAuthority(Authority.CHORBI));
+		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		Assert.isTrue(chorbi.getCreditCard() != null);
+
 		return this.chorbiLikeRepository.findChorbisByLiked(chorbiId);
 	}
 
