@@ -207,6 +207,21 @@ public class ChorbiServiceTest extends AbstractTest {
 		this.unauthenticate();
 	}
 
+	@Test
+	public void testFindChorbieSortedByAvgStars() {
+		this.authenticate("admin");
+
+		List<Chorbi> res;
+
+		res = new LinkedList<>(this.chorbiService.findChorbieSortedByAvgStars());
+
+		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
+
+		this.unauthenticate();
+	}
+
 	// Templates ------------------------------------
 
 	protected void registerTemplate(final String username, final String birthdate, final String passwd1, final String passwd2, final Class<?> expected) {

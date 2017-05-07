@@ -421,6 +421,8 @@ public class ChorbiService {
 	}
 
 	public Collection<Chorbi> findChorbieSortedByAvgStars() {
+		Assert.isTrue(this.actorService.checkAuthority(Authority.ADMIN));
+
 		Collection<Chorbi> res;
 
 		res = this.chorbiRepository.findChorbieSortedByAvgStars();

@@ -8,10 +8,12 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.BroadcastRepository;
+import security.Authority;
 import domain.Broadcast;
 import domain.Chirp;
 import domain.Chorbi;
@@ -79,18 +81,23 @@ public class BroadcastService {
 	 */
 
 	public Broadcast update(final Broadcast broadcast) {
+
 		Broadcast res;
 
 		res = null;
 
 		if (broadcast.getUninformedChorbies().isEmpty())
 			this.broadcastRepository.delete(broadcast);
-		else
+		else {
+			final Authority managerAuthority = new Authority();
+			managerAuthority.setAuthority(Authority.MANAGER);
+
+			Assert.isTrue(this.userService.findByPrincipal().getUserAccount().getAuthorities().contains(managerAuthority));
 			res = this.broadcastRepository.save(broadcast);
+		}
 
 		return res;
 	}
-
 	public void flush() {
 		this.broadcastRepository.flush();
 	}
@@ -150,6 +157,10 @@ public class BroadcastService {
 
 		for (final Chirp c : chirps)
 			this.chirpService.saveCopy(c);
+	}
+
+	public Collection<Broadcast> findAll() {
+		return this.broadcastRepository.findAll();
 	}
 
 	public Collection<Broadcast> findNonReceivedBroadcasts(final Chorbi chorbi) {
