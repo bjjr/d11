@@ -12,16 +12,13 @@
 
 <!-- Listing grid -->
 
-<fmt:formatDate value="${current}" pattern="yyyy" var="currentYear" />
-<fmt:formatDate value="${current}" pattern="MM" var="currentMonth" />
-<fmt:formatDate value="${current}" pattern="dd" var="currentDay" />
-
 <display:table pagesize="5" class="displaytag" name="events"
 	requestURI="${requestURI}" id="row">
 
-	<fmt:formatDate value="${row.moment}" pattern="yyyy" var="momentYear" />
-	<fmt:formatDate value="${row.moment}" pattern="MM" var="momentMonth" />
-	<fmt:formatDate value="${row.moment}" pattern="dd" var="momentDay" />
+	<jstl:set value="${row.moment.time - current.time}" var="diffms" />
+	
+	<jstl:set value="${(diffms <= 2592000000) and (diffms >= 0)}" var="isNear" />
+	<jstl:set value="${diffms < 0}" var="isPast" />
 
 	<spring:message code="event.picture" var="pic" />
 	<display:column  title="${pic}">
@@ -29,62 +26,35 @@
 	</display:column>
 
 	<jstl:choose>
-
-		<jstl:when
-			test="${currentYear lt momentYear or (currentYear eq momentYear and currentMonth lt momentMonth)}">
-
+		<jstl:when test="${!isNear and !isPast}">
 			<!-- Attributes -->
 			<acme:column code="event.title" property="${row.title}" />
-
 			<acme:column code="event.moment" property="moment" isTimestamp="true" />
-
 			<acme:column code="event.description" property="${row.description}" />
-
 			<acme:column code="event.seats" property="${row.seats}" />
-
 			<acme:column code="event.availableSeats" property="${row.availableSeats}" sortable="true" />
-
 			<acme:column code="manager.company" property="${row.manager.company}" />
-
 		</jstl:when>
 
-		<jstl:when
-			test="${currentYear eq momentYear and currentMonth eq momentMonth and currentDay le momentDay}">
-
-		<!-- Attributes -->
+		<jstl:when test="${isNear}">
+			<!-- Attributes -->
 			<acme:column code="event.title" property="${row.title}" style="background-color:yellow;" />
-
 			<acme:column code="event.moment" property="moment" style="background-color:yellow;" isTimestamp="true" />
-
 			<acme:column code="event.description" property="${row.description}" style="background-color:yellow;" />
-
 			<acme:column code="event.seats" property="${row.seats}" style="background-color:yellow;" />
-
 			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:yellow;" sortable="true" />
-
 			<acme:column code="manager.company" property="${row.manager.company}" style="background-color:yellow;" />
-
 		</jstl:when>
 
-
-		<jstl:when
-			test="${currentYear gt momentYear or (currentYear eq momentYear and currentMonth gt momentMonth) or (currentYear eq momentYear and currentMonth eq momentMonth and currentDay gt momentDay)}">
-
+		<jstl:when test="${isPast}">
 			<!-- Attributes -->
 			<acme:column code="event.title" property="${row.title}" style="background-color:grey;" />
-				
 			<acme:column code="event.moment" property="moment" style="background-color:grey;" isTimestamp="true" />
-
 			<acme:column code="event.description" property="${row.description}" style="background-color:grey;" />
-
 			<acme:column code="event.seats" property="${row.seats}" style="background-color:grey;" />
-
 			<acme:column code="event.availableSeats" property="${row.availableSeats}" style="background-color:grey;" sortable="true" />
-
 			<acme:column code="manager.company" property="${row.manager.name}" style="background-color:grey;" />
-
 		</jstl:when>
-
 	</jstl:choose>
 
 	<security:authorize access="hasRole('CHORBI')">
