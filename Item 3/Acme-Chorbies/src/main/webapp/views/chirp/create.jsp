@@ -20,9 +20,7 @@
 		<acme:select items="${chorbies}" itemLabel="userAccount.username" code="chirp.recipient" path="recipient"/>
 		
 		<acme:submit name="resend" code="chirp.resend"/>
-		<input type="button" name="cancel"
-				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/listSent.do'" />
+		<acme:cancel url="/chirp/listSent.do" code="misc.cancel"/>
 	</jstl:if>
 	
 	<jstl:if test="${!isResend}">
@@ -40,16 +38,12 @@
 		
 		<jstl:if test="${isReply}">
 			<acme:submit name="reply" code="chirp.reply"/>
-			<input type="button" name="cancel"
-				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/listReceived.do'" />
+			<acme:cancel url="/chirp/listReceived.do" code="misc.cancel"/>
 		</jstl:if>
 		
 		<jstl:if test="${!isReply}">
 			<acme:submit name="send" code="chirp.send"/>
-			<input type="button" name="cancel"
-				value="<spring:message code="misc.cancel" />"
-				onclick="window.location='chirp/listSent.do'" />
+			<acme:cancel url="/chorbi/list.do" code="misc.cancel"/>
 		</jstl:if>
 	</jstl:if>
 	

@@ -89,6 +89,9 @@ public class EventService {
 		Assert.notNull(event);
 
 		Event res;
+		Broadcast broadcast;
+
+		broadcast = null;
 
 		if (event.getId() == 0) {
 			Charge charge;
@@ -100,10 +103,21 @@ public class EventService {
 			this.chargeService.save(charge);
 		}
 
+		if (this.actorService.checkAuthority("MANAGER") && event.getId() != 0)
+			broadcast = this.getModificationsBroadcast(event);
+
 		res = this.eventRepository.save(event);
+
+		if (this.actorService.checkAuthority("MANAGER") && event.getId() != 0)
+			this.broadcastService.update(broadcast);
 
 		return res;
 	}
+
+	public void flush() {
+		this.eventRepository.flush();
+	}
+
 	/*
 	 * When an event is cancelled/deleted chorbies registered to the event
 	 * will receive a chirp.
@@ -322,6 +336,7 @@ public class EventService {
 
 		Assert.isTrue(!chorbi.getEvents().contains(event), "You are already registered to this event");
 		Assert.isTrue(event.getMoment().after(currentDate), "You can't register to past events");
+		Assert.isTrue(event.getAvailableSeats() > 0);
 
 		chorbi.getEvents().add(event);
 		event.setAvailableSeats(event.getAvailableSeats() - 1);

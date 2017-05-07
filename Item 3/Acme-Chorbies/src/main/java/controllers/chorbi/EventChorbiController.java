@@ -2,6 +2,7 @@
 package controllers.chorbi;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,13 +43,16 @@ public class EventChorbiController extends AbstractController {
 		ModelAndView res;
 		Collection<Event> events;
 		Chorbi principal;
+		Date currentDate;
 
 		principal = this.chorbiService.findByPrincipal();
 		events = principal.getEvents();
+		currentDate = new Date(System.currentTimeMillis());
 
 		res = new ModelAndView("event/list");
 		res.addObject("events", events);
 		res.addObject("requestURI", "event/chorbi/list.do");
+		res.addObject("current", currentDate);
 
 		return res;
 	}

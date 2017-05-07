@@ -46,7 +46,7 @@
 <h2><spring:message code="administrator.chorbiesOrderByCL" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesOrderByCL"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -91,7 +91,7 @@ requestURI="administrator/dashboard.do" id="row">
 
 <h2><spring:message code="administrator.chorbiesOrderByStars" /></h2>
 <display:table pagesize="5" class="displaytag" name="chorbiesOrderByStars"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -101,7 +101,7 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.chorbiesMCR" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesMCR"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -111,7 +111,7 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.chorbiesMCS" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesMCS"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -121,7 +121,7 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.managersSortedByNumberEvents" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="managersSortedByNumberEvents"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -138,7 +138,7 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.chorbiesSortedByNumberEvents" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesSortedByNumberEvents"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>
@@ -164,7 +164,7 @@ requestURI="administrator/dashboard.do" id="row">
 <h2><spring:message code="administrator.chorbiesSortedByAvgStars" /></h2>
 
 <display:table pagesize="5" class="displaytag" name="chorbiesSortedByAvgStars"
-requestURI="administrator/dashboard.do" id="row">
+requestURI="dashboard/administrator/dashboard.do" id="row">
 
 	<acme:column code="actor.name" property="${row.name}"/>
 	<acme:column code="actor.surname" property="${row.surname}"/>

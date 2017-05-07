@@ -3,6 +3,8 @@ package controllers.chorbi;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -57,7 +59,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final SearchTemplate searchTemplate, final BindingResult binding) {
+	public ModelAndView save(@Valid final SearchTemplate searchTemplate, final BindingResult binding) {
 		ModelAndView res;
 
 		if (binding.hasErrors())
