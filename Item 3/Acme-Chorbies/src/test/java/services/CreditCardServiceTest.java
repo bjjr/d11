@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.CreditCard;
@@ -65,6 +66,9 @@ public class CreditCardServiceTest extends AbstractTest {
 			creditCard.setYear(year);
 			creditCard.setMonth(month);
 			creditCard.setCvv(cvv);
+
+			Assert.isTrue(this.creditCardService.isCreditCardBrandValid(creditCard));
+			Assert.isTrue(this.creditCardService.isCreditCardDateValid(creditCard));
 
 			this.creditCardService.save(creditCard);
 			this.creditCardService.flush();

@@ -1096,25 +1096,25 @@
 	<bean id="charge8" class="domain.Charge">
 		<property name="amount" value="13" />
 		<property name="paid" value="true" />
-		<property name="user" ref="manager1" />
+		<property name="user" ref="manager3" />
 	</bean>
 	
 	<bean id="charge9" class="domain.Charge">
 		<property name="amount" value="25" />
 		<property name="paid" value="true" />
-		<property name="user" ref="manager1" />
+		<property name="user" ref="manager3" />
 	</bean>
 	
 	<bean id="charge10" class="domain.Charge">
 		<property name="amount" value="41" />
 		<property name="paid" value="false" />
-		<property name="user" ref="manager1" />
+		<property name="user" ref="manager3" />
 	</bean>
 	
 	<bean id="charge11" class="domain.Charge">
 		<property name="amount" value="4" />
 		<property name="paid" value="false" />
-		<property name="user" ref="manager1" />
+		<property name="user" ref="manager3" />
 	</bean>
 
 	<bean id="charge12" class="domain.Charge">

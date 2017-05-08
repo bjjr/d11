@@ -44,11 +44,11 @@ public class ChargeServiceTest extends AbstractTest {
 	public void payChargeDriver() {
 		final Object testingData[][] = {
 			{    // A chorbi or a manager cannot pay a charge already paid
-				"manager1", 1847, IllegalArgumentException.class
+				"manager3", 1847, IllegalArgumentException.class
 			}, { // A chorbi cannot pay a charge of a manager 
 				"chorbi1", 1849, IllegalArgumentException.class
 			}, { // Successful test
-				"manager1", 1849, null
+				"manager3", 1849, null
 			}
 		};
 
