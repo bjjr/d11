@@ -35,6 +35,9 @@ public class ChargeService {
 	@Autowired
 	private ChorbiService		chorbiService;
 
+	@Autowired
+	private CreditCardService	creditCardService;
+
 
 	// Constructors -----------------------------------------
 
@@ -118,6 +121,7 @@ public class ChargeService {
 		userId = this.actorService.findByPrincipal().getId();
 		Assert.isTrue(charge.getUser().getId() == userId, "Cannot pay a charge of another chorbi or a manager");
 		Assert.isTrue(charge.getUser().getCreditCard() != null, "You should have a valid credit card");
+		Assert.isTrue(this.creditCardService.isCreditCardDateValid(charge.getUser().getCreditCard()), "You should have a valid credit card");
 
 		charge.setPaid(true);
 		result = this.save(charge);
