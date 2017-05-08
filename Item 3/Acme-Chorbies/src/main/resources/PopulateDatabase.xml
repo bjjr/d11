@@ -611,7 +611,7 @@
 	
 	<bean id="creditCard6" class="domain.CreditCard">
 		<property name="holder" value="holderName6"/>
-		<property name="brand" value="HELLO" />
+		<property name="brand" value="VISA" />
 		<property name="number" value="342706286514582" />
 		<property name="year" value="2030" />
 		<property name="month" value="05" />
@@ -620,7 +620,7 @@
 	
 	<bean id="creditCard7" class="domain.CreditCard">
 		<property name="holder" value="holderName7"/>
-		<property name="brand" value="N26" />
+		<property name="brand" value="MASTERCARD" />
 		<property name="number" value="4716931078234724" />
 		<property name="year" value="2222" />
 		<property name="month" value="05" />

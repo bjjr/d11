@@ -100,7 +100,8 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 
 	/*
 	 * Test case: A chorbi decides to browse the chorbies who liked him.
-	 * Functional Requirement: An actor who is authenticated as an chorbi must be able to Browse the catalogue of chorbies who have liked him or her as long as he or she has registered a valid credit card. If he or she’s not register a valid card, then the
+	 * Functional Requirement: An actor who is authenticated as an chorbi must be able to Browse the catalogue of chorbies who have liked him or her as long as he or she has registered a valid credit card. If he or she’s not register a valid card, then
+	 * the
 	 * system must ask him or her to do so; the system must inform the chorbies that their credit cards will not be charged.
 	 */
 
@@ -271,7 +272,7 @@ public class ChorbiLikeServiceTest extends AbstractTest {
 			this.authenticate(username);
 			final Actor actor = this.actorService.findByPrincipal();
 
-			final Collection<Chorbi> chorbiesLikers = this.chorbiLikeService.findChorbisByLiked(actor.getId());
+			this.chorbiLikeService.findChorbisByLiked(actor.getId());
 
 			this.unauthenticate();
 		} catch (final Throwable th) {

@@ -27,6 +27,7 @@
 			<form:option value="DINNERS" label="DINNERS" />
 			<form:option value="AMEX" label="AMEX" />
 		</form:select>
+		<form:errors path="brand" cssClass="error" />
 	</div>
 
 	<acme:textbox code="creditcard.number" path="number"/>

@@ -29,6 +29,9 @@ public class CreditCardService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	public CreditCard create() {
 		final CreditCard res = new CreditCard();
@@ -44,20 +47,18 @@ public class CreditCardService {
 	}
 
 	public CreditCard save(final CreditCard creditCard) {
+		Assert.isTrue(this.actorService.checkAuthority("MANAGER") || this.actorService.checkAuthority("CHORBI"));
 		Assert.notNull(creditCard);
 		User user;
 		CreditCard res;
 
 		user = this.userService.findByPrincipal();
-		Assert.notNull(user, "You are not logged as an User");
 
 		// Save Brand in Uppercase
 		creditCard.setBrand(creditCard.getBrand().toUpperCase());
 
-		Assert.isTrue(this.isCreditCardBrandValid(creditCard), "Brand name is not valid");
-		Assert.isTrue(this.isCreditCardDateValid(creditCard), "Date is not valid. The expiration date must be at least one day after today.");
-
 		res = this.creditCardRepository.save(creditCard);
+
 		if (creditCard.getId() == 0) {
 			user.setCreditCard(res);
 			this.userService.save(user);
@@ -83,17 +84,24 @@ public class CreditCardService {
 	}
 
 	public CreditCard reconstruct(final CreditCard creditCard, final BindingResult bindingResult) {
-		User user;
+		Assert.isTrue(this.actorService.checkAuthority("MANAGER") || this.actorService.checkAuthority("CHORBI"));
 		CreditCard res;
+		User user;
 
 		user = this.userService.findByPrincipal();
-		Assert.notNull(user, "You are not logged as an User");
+
+		if (creditCard.getId() != 0)
+			Assert.isTrue(user.getCreditCard().getId() == creditCard.getId(), "You cannot edit info of other credit cards");
+
+		if (user.getCreditCard() == null)
+			Assert.isTrue(creditCard.getId() == 0, "You cannot edit info of other credit cards");
 
 		res = creditCard;
 
 		if (!this.isCreditCardDateValid(res))
 			bindingResult.rejectValue("month", "creditcard.error.dates");
-		else if (!this.isCreditCardBrandValid(creditCard))
+
+		if (!this.isCreditCardBrandValid(res))
 			bindingResult.rejectValue("brand", "creditcard.error.brand");
 
 		this.validator.validate(res, bindingResult);
