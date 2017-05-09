@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ChargeService;
+import services.CreditCardService;
 import controllers.AbstractController;
 import domain.Charge;
+import domain.CreditCard;
+import domain.User;
 
 @Controller
 @RequestMapping("/charge/user")
@@ -21,7 +25,13 @@ public class ChargeUserController extends AbstractController {
 	// Services -----------------------------------------------
 
 	@Autowired
-	private ChargeService	chargeService;
+	private ChargeService		chargeService;
+
+	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	// Constructors -------------------------------------------
@@ -52,12 +62,23 @@ public class ChargeUserController extends AbstractController {
 	public ModelAndView pay(@RequestParam final int chargeId) {
 		ModelAndView result;
 		Charge charge;
+		User user;
+		CreditCard creditCard;
 
 		charge = this.chargeService.findOne(chargeId);
+		user = (User) this.actorService.findByPrincipal();
+		creditCard = user.getCreditCard();
+		result = new ModelAndView();
 
 		try {
-			this.chargeService.pay(charge);
-			result = new ModelAndView("redirect:/charge/user/list.do");
+			if (creditCard == null)
+				result = new ModelAndView("redirect:/creditCard/create.do");
+			if (creditCard != null && !this.creditCardService.isCreditCardDateValid(creditCard))
+				result = new ModelAndView("redirect:/creditCard/edit.do?creditCardId=" + creditCard.getId());
+			if (creditCard != null && this.creditCardService.isCreditCardDateValid(creditCard)) {
+				this.chargeService.pay(charge);
+				result = new ModelAndView("redirect:/charge/user/list.do");
+			}
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/charge/user/list.do");
 			result.addObject("misc.commit.error");
