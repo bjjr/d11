@@ -32,23 +32,44 @@ public class ChargeServiceTest extends AbstractTest {
 
 	// Tests ------------------------------------------------------------------
 
+	// USE CASE WITH 10 TESTS
+
 	/*
 	 * Use case: An actor who is authenticated as a chorbi or manager must be able to:
 	 * Pay a charge not paid yet
 	 * Expected errors:
-	 * - A manager tries to pay a charge already paid --> IllegalArgumentException
-	 * - A chorbi tries to pay a charge of another chorbi or a manager --> IllegalArgumentException
+	 * - A non registered user tries to pay a charge --> IllegalArgumentException
+	 * - An administrator tries to pay a charge --> IllegalArgumentException
+	 * - A chorbi or manager without credit card tries to pay a charge --> IllegalArgumentException
+	 * - A chorbi or manager with an invalid credit card tries to pay a charge --> IllegalArgumentException
+	 * - A chorbi or manager tries to pay a charge already paid --> IllegalArgumentException
+	 * - A chorbi tries to pay a charge of another chorbi --> IllegalArgumentException
+	 * - A manager tries to pay a charge of a chorbi --> IllegalArgumentException
 	 */
 
 	@Test
 	public void payChargeDriver() {
 		final Object testingData[][] = {
-			{    // A chorbi or a manager cannot pay a charge already paid
+			{    // A non registered user cannot pay a charge
+				null, 1874, IllegalArgumentException.class
+			}, { // An administrator cannot pay a charge
+				"admin", 1847, IllegalArgumentException.class
+			}, { // A chorbi or manager without credit card cannot pay a charge 
+				"manager4", 1854, IllegalArgumentException.class
+			}, { // A chorbi or manager with an invalid credit card cannot pay a charge 
+				"chorbi7", 1899, IllegalArgumentException.class
+			}, { // A chorbi or a manager cannot pay a charge already paid
 				"manager3", 1847, IllegalArgumentException.class
-			}, { // A chorbi cannot pay a charge of a manager 
-				"chorbi1", 1849, IllegalArgumentException.class
+			}, { // A chorbi cannot pay a charge of another chorbi
+				"chorbi3", 1895, IllegalArgumentException.class
+			}, { // A manager cannot pay a charge of a chorbi
+				"manager3", 1895, IllegalArgumentException.class
 			}, { // Successful test
 				"manager3", 1849, null
+			}, { // Successful test
+				"manager2", 1852, null
+			}, { // Successful test
+				"manager3", 1850, null
 			}
 		};
 
@@ -113,6 +134,7 @@ public class ChargeServiceTest extends AbstractTest {
 
 			charge = this.chargeService.findOne(chargeId);
 			saved = this.chargeService.pay(charge);
+			this.chargeService.flush();
 
 			this.unauthenticate();
 
@@ -139,6 +161,7 @@ public class ChargeServiceTest extends AbstractTest {
 			this.authenticate(username);
 
 			this.chargeService.generateChargesToChorbies();
+			this.chargeService.flush();
 			chargesAfter = this.chargeService.findAll().size();
 
 			this.unauthenticate();
