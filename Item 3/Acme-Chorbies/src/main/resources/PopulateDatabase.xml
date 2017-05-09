@@ -1090,7 +1090,7 @@
 	<bean id="charge7" class="domain.Charge">
 		<property name="amount" value="7" />
 		<property name="paid" value="true" />
-		<property name="user" ref="chorbi2" />
+		<property name="user" ref="chorbi7" />
 	</bean>
 
 	<bean id="charge8" class="domain.Charge">

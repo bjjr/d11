@@ -1,6 +1,8 @@
 
 package services;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,20 +36,20 @@ public class FeeServiceTest extends AbstractTest {
 	 * Change the fee that is charged to managers and chorbies
 	 * Expected errors:
 	 * - An actor logged as chorbi tries to change a fee --> IllegalArgumentException
-	 * - An administrator tries to change a fee introducing a not valid value --> IllegalArgumentException
+	 * - An administrator tries to change a fee introducing a not valid value --> ConstraintViolationException
 	 */
 
 	@Test
 	public void changeFeeDriver() {
 		final Object testingData[][] = {
-			{    //An actor logged as chorbi cannot change a fee
-				"chorbi1", 1846, 12.0, IllegalArgumentException.class
-			}, { //An administrator cannot introduce a not valid value for a fee
-				"admin", 1845, -2.0, IllegalArgumentException.class
-			}, { // Successful test
+			{    // Successful test
 				"admin", 1845, 4.0, null
 			}, { // Successful test
 				"admin", 1846, 7.0, null
+			}, { //An actor logged as chorbi cannot change a fee
+				"chorbi1", 1846, 12.0, IllegalArgumentException.class
+			}, { //An administrator cannot introduce a not valid value for a fee
+				"admin", 1845, -2.0, ConstraintViolationException.class
 			}
 		};
 
@@ -70,6 +72,7 @@ public class FeeServiceTest extends AbstractTest {
 			fee = this.feeService.findOne(feeId);
 			fee.setValue(feeValue);
 			saved = this.feeService.save(fee);
+			this.feeService.flush();
 
 			this.unauthenticate();
 

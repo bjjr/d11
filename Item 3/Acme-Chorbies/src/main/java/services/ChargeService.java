@@ -129,6 +129,10 @@ public class ChargeService {
 		return result;
 	}
 
+	public void flush() {
+		this.chargeRepository.flush();
+	}
+
 	// Other business methods -------------------------------
 
 	public void generateChargesToChorbies() {
