@@ -201,8 +201,8 @@ public class ChorbiServiceTest extends AbstractTest {
 		res = new LinkedList<>(this.chorbiService.findChorbiesSortNumStars());
 
 		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
-		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
-		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1862)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1863)));
 
 		this.unauthenticate();
 	}
@@ -216,8 +216,8 @@ public class ChorbiServiceTest extends AbstractTest {
 		res = new LinkedList<>(this.chorbiService.findChorbieSortedByAvgStars());
 
 		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
-		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
-		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1862)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1863)));
 
 		this.unauthenticate();
 	}
