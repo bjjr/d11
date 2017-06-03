@@ -27,14 +27,37 @@
 <%@ attribute name="property" required="true" %>
 <%@ attribute name="sortable" required="false" %>
 <%@ attribute name="style" required="false" %>
+<%@ attribute name="isDate" required="false" %>
+<%@ attribute name="isTimestamp" required="false" %>
 
 <jstl:if test="${sortable == null}">
 	<jstl:set var="sortable" value="false" />
 </jstl:if>
 
+<jstl:if test="${isDate == null}">
+	<jstl:set var="isDate" value="false" />
+</jstl:if>
+
+<jstl:if test="${isTimestamp == null}">
+	<jstl:set var="isTimestamp" value="false" />
+</jstl:if>
+
 <%-- Definition --%>
 
 <spring:message code="${code}" var="var" />
-<display:column  title="${var}" sortable="${sortable}" style="${style }" >
-	<jstl:out value="${property}" />
-</display:column>
+
+<jstl:choose>
+	<jstl:when test="${isDate}">
+		<display:column property="${property}" title="${var}" sortable="${sortable}" style="${style}" format="{0,date,dd/MM/yyyy}" />
+	</jstl:when>
+	
+	<jstl:when test="${isTimestamp}">
+		<display:column property="${property}" title="${var}" sortable="${sortable}" style="${style}" format="{0,date,dd/MM/yyyy HH:mm}" />
+	</jstl:when>
+	
+	<jstl:otherwise>
+		<display:column  title="${var}" sortable="${sortable}" style="${style}">
+			<jstl:out value="${property}" />
+		</display:column>
+	</jstl:otherwise>
+</jstl:choose>

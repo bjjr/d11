@@ -23,13 +23,37 @@
 <%-- Attributes --%> 
 
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="property" required="true" %>
+<%@ attribute name="property" required="false" %>
+<%@ attribute name="date" required="false" type="java.util.Date" %>
+<%@ attribute name="isDate" required="false" %>
+<%@ attribute name="isTimestamp" required="false" %>
+
+<jstl:if test="${isDate == null}">
+	<jstl:set var="isDate" value="false" />
+</jstl:if>
+
+<jstl:if test="${isTimestamp == null}">
+	<jstl:set var="isTimestamp" value="false" />
+</jstl:if>
 
 <%-- Definition --%>
 
 <div>
 	<spring:message code="${code}" var="var" />
 	<h4>
-		<jstl:out value="${var}"  />: <jstl:out value="${property}"></jstl:out>
+		<jstl:choose>
+			<jstl:when test="${isDate}">
+				<jstl:out value="${var}" />: <fmt:formatDate value="${date}" type="date" />
+			</jstl:when>
+			
+			<jstl:when test="${isTimestamp}">
+				<jstl:out value="${var}" />: <fmt:formatDate value="${date}" type="both" timeStyle="short" />
+			</jstl:when>
+			
+			<jstl:otherwise>
+				<jstl:out value="${var}" />: <jstl:out value="${property}" />
+			</jstl:otherwise>
+		</jstl:choose>
+		
 	</h4>
 </div>

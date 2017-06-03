@@ -42,6 +42,7 @@
 		<property name="userAccount" ref="userAccountA" />
 	</bean>
 	
+	
 	<!-- BANNERS -->
 	
 	<bean id="banner1" class="domain.Banner">
@@ -51,12 +52,25 @@
 	
 	<bean id="banner2" class="domain.Banner">
 		<property name="service" value="Acme BnB" />
-		<property name="path" value="https://github.com/bjjr/d08/raw/deploy/Item%204/AcmeBnB/src/main/webapp/images/logo.png" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d08/deploy/Item%204/AcmeBnB/src/main/webapp/images/logo.png" />
 	</bean>
 	
 	<bean id="banner3" class="domain.Banner">
 		<property name="service" value="Acme CnG" />
-		<property name="path" value="https://github.com/bjjr/d09/raw/master/Item%203/Acme-CnG/src/main/webapp/images/logo.png" />
+		<property name="path" value="https://raw.githubusercontent.com/bjjr/d09/master/Item%203/Acme-CnG/src/main/webapp/images/logo.png" />
 	</bean>
 	
+		
+	<!-- FEE -->
+	
+	<bean id="fee1" class="domain.Fee">
+		<property name="feeType" value="1" />
+		<property name="value" value="1" />
+	</bean>
+	
+	<bean id="fee2" class="domain.Fee">
+		<property name="feeType" value="2" />
+		<property name="value" value="1" />
+	</bean>
+
 </beans>

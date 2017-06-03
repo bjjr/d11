@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -104,12 +105,12 @@ public class ChorbiServiceTest extends AbstractTest {
 	@Test
 	public void banChorbiDriver() {
 		final Object testingData[][] = {
-			{// The administrator bans an unbanned chorbi (chorbi9 = 1021)
-				"admin", 1021, null
+			{// The administrator bans an unbanned chorbi (chorbi9 = 1863)
+				"admin", 1863, null
 			}, {// A chorbi tries to ban another chorbi.
-				"chorbi1", 1021, IllegalArgumentException.class
+				"chorbi1", 1863, IllegalArgumentException.class
 			}, {// A non registered user tries to ban a chorbi
-				null, 1021, IllegalArgumentException.class
+				null, 1863, IllegalArgumentException.class
 			}
 		};
 
@@ -125,12 +126,12 @@ public class ChorbiServiceTest extends AbstractTest {
 	@Test
 	public void unbanChorbiDriver() {
 		final Object testingData[][] = {
-			{// The administrator bans an unbanned chorbi (chorbi9 = 1021)
-				"admin", 1022, null
-			}, {// A chorbi tries to ban another chorbi.
-				"chorbi1", 1022, IllegalArgumentException.class
-			}, {// A non registered user tries to ban a chorbi
-				null, 1022, IllegalArgumentException.class
+			{// The administrator unbans an unbanned chorbi (chorbi10 = 1864)
+				"admin", 1864, null
+			}, {// A chorbi tries to unban another chorbi.
+				"chorbi1", 1864, IllegalArgumentException.class
+			}, {// A non registered user tries to unban a chorbi
+				null, 1864, IllegalArgumentException.class
 			}
 		};
 
@@ -147,7 +148,7 @@ public class ChorbiServiceTest extends AbstractTest {
 
 		success = false;
 		chorbies = (List<Chorbi>) this.chorbiService.findChorbiesSortNumLikes();
-		if (chorbies.get(0).getId() == 1016)
+		if (chorbies.get(0).getId() == 1858)
 			success = true;
 
 		Assert.isTrue(success);
@@ -165,7 +166,7 @@ public class ChorbiServiceTest extends AbstractTest {
 		success = false;
 		chorbies = this.chorbiService.findChorbiesMoreChirpsRec();
 		for (final Chorbi chorbi : chorbies)
-			if (chorbi.getId() == 1016)
+			if (chorbi.getId() == 1858)
 				success = true;
 
 		Assert.isTrue(success);
@@ -183,10 +184,40 @@ public class ChorbiServiceTest extends AbstractTest {
 		success = false;
 		chorbies = this.chorbiService.findChorbiesMoreChirpsSend();
 		for (final Chorbi chorbi : chorbies)
-			if (chorbi.getId() == 1015)
+			if (chorbi.getId() == 1857)
 				success = true;
 
 		Assert.isTrue(success);
+
+		this.unauthenticate();
+	}
+
+	@Test
+	public void testFindChorbiesSortNumStars() {
+		this.authenticate("admin");
+
+		List<Chorbi> res;
+
+		res = new LinkedList<>(this.chorbiService.findChorbiesSortNumStars());
+
+		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
+
+		this.unauthenticate();
+	}
+
+	@Test
+	public void testFindChorbieSortedByAvgStars() {
+		this.authenticate("admin");
+
+		List<Chorbi> res;
+
+		res = new LinkedList<>(this.chorbiService.findChorbieSortedByAvgStars());
+
+		Assert.isTrue(res.get(0).equals(this.chorbiService.findOne(1858)));
+		Assert.isTrue(res.get(1).equals(this.chorbiService.findOne(1861)));
+		Assert.isTrue(res.get(2).equals(this.chorbiService.findOne(1862)));
 
 		this.unauthenticate();
 	}

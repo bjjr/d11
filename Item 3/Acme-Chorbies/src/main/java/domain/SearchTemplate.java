@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -47,6 +48,7 @@ public class SearchTemplate extends DomainEntity implements Serializable {
 		this.gender = gender;
 	}
 
+	@Valid
 	public CoordinatesTemplate getCoordinatesTemplate() {
 		return this.coordinatesTemplate;
 	}
