@@ -88,8 +88,11 @@
 			<li><a class="fNiv" href="event/listAvSts.do"><spring:message code="master.page.event.list.recent" /></a></li>
 		</security:authorize>
 		
-		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN', 'MANAGER')">
+		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN')">
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message code="master.page.chorbi.list" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasAnyRole('CHORBI', 'ADMIN', 'MANAGER')">
 			<li><a class="fNiv" href="event/list.do"><spring:message code="master.page.event.list.all" /></a></li>
 			<li><a class="fNiv" href="event/listAvSts.do"><spring:message code="master.page.event.list.recent" /></a></li>
 			<li><a class="fNiv"> 
